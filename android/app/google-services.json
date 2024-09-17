@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "474487617626",
+    "project_id": "yourmech-73806",
+    "storage_bucket": "yourmech-73806.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:474487617626:android:5d0de00b3e049f2af8c063",
+        "android_client_info": {
+          "package_name": "com.example.yourmech"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDkydWmpHgwz8NtBkKzPNqxtXsedz13jzw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
