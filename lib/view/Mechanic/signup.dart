@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:yourmech/controller/Authentication/Mechsignup.dart';
 import 'package:yourmech/model/style/color.dart';
 import 'package:yourmech/model/widget/custom_button.dart';
 import 'package:yourmech/model/widget/custom_text.dart';
@@ -31,7 +32,6 @@ class _SignupState extends State<Signup> {
             child: Form(
               key: formKey,
               child: Column(children: [
-               
                 Padding(
                   padding: EdgeInsets.only(right: 50.0, top: 30, bottom: 0.r),
                   child: Text(
@@ -43,7 +43,6 @@ class _SignupState extends State<Signup> {
                         fontWeight: FontWeight.w500),
                   ),
                 ),
-                
                 Padding(
                   padding: EdgeInsets.only(left: 0, top: 40.r),
                   child: SizedBox(
@@ -167,12 +166,12 @@ class _SignupState extends State<Signup> {
                 Button.elevatedButton(
                     text: 'SIGNUP',
                     onPressed: () {
-                       if (formKey.currentState?.validate() ?? false) {
-                              print(mechname.text);
-                              print(mechemail.text);
-                              print(mechmobile.text);
-                              print(mechpassword.text);
-                            }
+                      if (formKey.currentState?.validate() ?? false) {
+                        print(mechname.text);
+                        print(mechemail.text);
+                        print(mechmobile.text);
+                        print(mechpassword.text);
+                      }
                       Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -181,6 +180,8 @@ class _SignupState extends State<Signup> {
                     }),
                 TextButton(
                     onPressed: () {
+                      Signupmech;
+
                       Navigator.push(
                           context,
                           MaterialPageRoute(
