@@ -12,7 +12,7 @@ class CustomHead extends StatelessWidget {
     return Text(
       text,
       style: TextStyle(
-        fontSize: 32.sp,
+        fontSize: 32.spMin,
         fontWeight: FontWeight.w500,
         color: Mycolor.maincolor,
         fontFamily: 'Poppins',

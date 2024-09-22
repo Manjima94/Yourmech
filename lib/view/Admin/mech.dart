@@ -31,7 +31,7 @@ class _MechanicState extends State<Mechanic> {
                     (BuildContext context, VoidCallback openContainer) {
                   return ListTile(
                     contentPadding:
-                        REdgeInsets.symmetric(horizontal: 30.r, vertical: 5.r),
+                        REdgeInsets.symmetric( vertical: 5.r),
                     tileColor: Colors.white,
                     shape: ContinuousRectangleBorder(
                         borderRadius: BorderRadius.circular(0.r)),

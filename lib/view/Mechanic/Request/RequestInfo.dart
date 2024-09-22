@@ -119,7 +119,7 @@ class _RequestInfoState extends State<RequestInfo> {
                         child: CustomText(''),
                       ),
                       Padding(
-                      padding: EdgeInsets.only(top: 35.r,right: 10),
+                      padding: EdgeInsets.only(top: 40.r,right: 10),
                         child: ElevatedButton(
                           style: ButtonStyle(
                             fixedSize: MaterialStatePropertyAll(Size(
@@ -151,22 +151,16 @@ class _RequestInfoState extends State<RequestInfo> {
             ),
           ),
         ),
-        Padding(
-          padding: EdgeInsets.only(bottom: 0, top: 19.r),
-          child: Container(
-            height: ScreenUtil().setHeight(105),
-            decoration:
-                BoxDecoration(color: Mycolor.maincolor, shape: BoxShape.circle),
+       
+        Positioned(
+          left: 120,top: 120,
+          child: Padding(
+            padding: EdgeInsets.all(24.r),
+            child: CircleAvatar(
+              radius: 51.r,
+            ),
           ),
         ),
-        Align(
-            alignment: Alignment.topCenter,
-            child: Padding(
-              padding: EdgeInsets.all(24.r),
-              child: CircleAvatar(
-                radius: 51.r,
-              ),
-            )),
       ]),
     );
   }

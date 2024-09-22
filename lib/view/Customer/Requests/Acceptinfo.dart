@@ -27,7 +27,7 @@ class _AcceptUserState extends State<AcceptUser> {
         child: Container(
           alignment: Alignment.center,
           width: ScreenUtil().setWidth(300),
-          height: ScreenUtil().setHeight(500),
+          height: ScreenUtil().setHeight(600),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(25.r),
             color: Colors.white,
@@ -67,14 +67,14 @@ class _AcceptUserState extends State<AcceptUser> {
                 child: CustomText('Contact no :'),
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 30, bottom: 10),
+                padding: const EdgeInsets.only(top: 30, bottom: 20),
                 child: ElevatedButton(
                   style: ButtonStyle(
                     shadowColor: MaterialStatePropertyAll(Mycolor.maincolor),
                     elevation: MaterialStatePropertyAll(5),
                     fixedSize: MaterialStatePropertyAll(Size(
                         ScreenUtil().setWidth(240),
-                        ScreenUtil().setHeight(35))),
+                        ScreenUtil().setHeight(45))),
                     shape: MaterialStatePropertyAll(
                       RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(15),
@@ -143,7 +143,7 @@ class _AcceptUserState extends State<AcceptUser> {
                   shadowColor: MaterialStatePropertyAll(Mycolor.maincolor),
                   elevation: MaterialStatePropertyAll(5),
                   fixedSize: MaterialStatePropertyAll(Size(
-                      ScreenUtil().setWidth(240), ScreenUtil().setHeight(35))),
+                      ScreenUtil().setWidth(240), ScreenUtil().setHeight(45))),
                   shape: MaterialStatePropertyAll(
                     RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15),

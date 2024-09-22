@@ -22,152 +22,161 @@ class _UserSignupState extends State<UserSignup> {
   var username = TextEditingController();
   var usermobile = TextEditingController();
   var userlocation = TextEditingController();
-
+  var formkey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         body: SingleChildScrollView(
       child: Center(
-        child: Column(children: [
-          ClipPath(
-            clipper: WaveClipperOne(flip: true),
-            clipBehavior: Clip.hardEdge,
-            child: Image(
-              image: const AssetImage('images/book.jpg'),
-              width: ScreenUtil().setWidth(double.infinity),
-              fit: BoxFit.cover,
-            ),
-          ),
-          // Padding(
-          //   padding: EdgeInsets.only(right: 50.0, top: 0, bottom: 0.r),
-          //   child: Text(
-          //     'Create Your Account...',
-          //     style: TextStyle(
-          //         fontFamily: 'Poppins',
-          //         fontSize: 23.sp,
-          //         color: Mycolor.maincolor,
-          //         fontWeight: FontWeight.w500),
-          //   ),
-          // ),
-          Padding(
-            padding: EdgeInsets.only(left: 0, top: 40.r),
-            child: SizedBox(
-              width: ScreenUtil().setWidth(300),
-              height: ScreenUtil().setHeight(40),
-              child: CustomTextFormField(
-                controller: username,
-                hintText: 'Name',
-                validator: (value) {
-                  if (value == null) {
-                    return 'Invalid email entered';
-                  }
-                  return null;
-                },
-                prefixIcon: Icon(Icons.person,
-                    color: const Color.fromARGB(255, 55, 22, 115), size: 23.r),
-                fillcolor: Mycolor.textfield,
+        child: Form(
+          key: formkey,
+          child: Column(children: [
+            ClipPath(
+              clipper: WaveClipperOne(flip: true),
+              clipBehavior: Clip.hardEdge,
+              child: Image(
+                image: const AssetImage('assets/images/book.jpg'),
+                width: ScreenUtil().setWidth(double.infinity),
+                fit: BoxFit.cover,
               ),
             ),
-          ),
-          Padding(
-            padding: EdgeInsets.only(left: 0, top: 15.r),
-            child: SizedBox(
-              width: ScreenUtil().setWidth(300),
-              height: ScreenUtil().setHeight(40),
-              child: CustomTextFormField(
-                controller: usermobile,
-                hintText: 'Mobile',
-                validator: (value) {
-                  if (value == null) {
-                    return 'Incorrect password';
-                  }
-                  return null;
-                },
-                prefixIcon: Icon(Icons.call,
-                    color: const Color.fromARGB(255, 55, 22, 115), size: 23.r),
-                fillcolor: Mycolor.textfield,
+            // Padding(
+            //   padding: EdgeInsets.only(right: 50.0, top: 0, bottom: 0.r),
+            //   child: Text(
+            //     'Create Your Account...',
+            //     style: TextStyle(
+            //         fontFamily: 'Poppins',
+            //         fontSize: 23.sp,
+            //         color: Mycolor.maincolor,
+            //         fontWeight: FontWeight.w500),
+            //   ),
+            // ),
+            Padding(
+              padding: EdgeInsets.only(left: 0, top: 40.r),
+              child: SizedBox(
+                width: ScreenUtil().setWidth(300),
+                height: ScreenUtil().setHeight(50),
+                child: CustomTextFormField(
+                  controller: username,
+                  hintText: 'Name',
+                  validator: (value) {
+                    if (value?.isEmpty ?? true) {
+                      return 'enter a valid name';
+                    }
+                    return null;
+                  },
+                  prefixIcon: Icon(Icons.person,
+                      color: const Color.fromARGB(255, 55, 22, 115),
+                      size: 23.r),
+                  fillcolor: Mycolor.textfield,
+                ),
               ),
             ),
-          ),
-          Padding(
-            padding: EdgeInsets.only(left: 0, top: 15.r),
-            child: SizedBox(
-              width: ScreenUtil().setWidth(300),
-              height: ScreenUtil().setHeight(40),
-              child: CustomTextFormField(
-                controller: userpassword,
-                hintText: 'Location',
-                validator: (value) {
-                  if (value == null) {
-                    return 'Incorrect password';
-                  }
-                  return null;
-                },
-                prefixIcon: Icon(Icons.location_on_rounded,
-                    color: Color.fromARGB(255, 55, 22, 115), size: 23.r),
-                fillcolor: Mycolor.textfield,
+            Padding(
+              padding: EdgeInsets.only(left: 0, top: 15.r),
+              child: SizedBox(
+                width: ScreenUtil().setWidth(300),
+                height: ScreenUtil().setHeight(50),
+                child: CustomTextFormField(
+                  controller: usermobile,
+                  hintText: 'Mobile',
+                  validator: (value) {
+                    if (value!.isEmpty || value.length != 10) {
+                      return 'Enter a valid phone number';
+                    }
+                    return null;
+                  },
+                  prefixIcon: Icon(Icons.call,
+                      color: const Color.fromARGB(255, 55, 22, 115),
+                      size: 23.r),
+                  fillcolor: Mycolor.textfield,
+                ),
               ),
             ),
-          ),
-          Padding(
-            padding: EdgeInsets.only(left: 0, top: 15.r),
-            child: SizedBox(
-              width: ScreenUtil().setWidth(300),
-              height: ScreenUtil().setHeight(40),
-              child: CustomTextFormField(
-                controller: useremail,
-                hintText: 'Email',
-                validator: (value) {
-                  if (value == null) {
-                    return 'Invalid email entered';
-                  }
-                  return null;
-                },
-                prefixIcon: Icon(Icons.mail,
-                    color: Color.fromARGB(255, 55, 22, 115), size: 23.r),
-                fillcolor: Mycolor.textfield,
+            Padding(
+              padding: EdgeInsets.only(left: 0, top: 15.r),
+              child: SizedBox(
+                width: ScreenUtil().setWidth(300),
+                height: ScreenUtil().setHeight(50),
+                child: CustomTextFormField(
+                  controller: userpassword,
+                  hintText: 'Location',
+                  validator: (value) {
+                    if (value == null) {
+                      return 'Required';
+                    }
+                    return null;
+                  },
+                  prefixIcon: Icon(Icons.location_on_rounded,
+                      color: Color.fromARGB(255, 55, 22, 115), size: 23.r),
+                  fillcolor: Mycolor.textfield,
+                ),
               ),
             ),
-          ),
-          Padding(
-            padding: EdgeInsets.only(bottom: 40, top: 15.r),
-            child: SizedBox(
-              width: ScreenUtil().setWidth(300),
-              height: ScreenUtil().setHeight(40),
-              child: CustomTextFormField(
-                controller: useremail,
-                hintText: 'Password',
-                validator: (value) {
-                  if (value == null) {
-                    return 'Incorrect password';
-                  }
-                  return null;
-                },
-                prefixIcon: Icon(Icons.car_rental,
-                    color: Color.fromARGB(255, 55, 22, 115), size: 30.r),
-                fillcolor: Mycolor.textfield,
+            Padding(
+              padding: EdgeInsets.only(left: 0, top: 15.r),
+              child: SizedBox(
+                width: ScreenUtil().setWidth(300),
+                height: ScreenUtil().setHeight(50),
+                child: CustomTextFormField(
+                  controller: useremail,
+                  hintText: 'Email',
+                  validator: (value) {
+                    if (value == null) {
+                      return 'Invalid email entered';
+                    }
+                    return null;
+                  },
+                  prefixIcon: Icon(Icons.mail,
+                      color: Color.fromARGB(255, 55, 22, 115), size: 23.r),
+                  fillcolor: Mycolor.textfield,
+                ),
               ),
             ),
-          ),
-          Button.elevatedButton(
-              text: 'SIGNUP',
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => UserLogin(),
-                    ));
-              }),
-          TextButton(
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => UserLogin(),
-                    ));
-              },
-              child: CustomText('Already have an Account? Login'))
-        ]),
+            Padding(
+              padding: EdgeInsets.only(bottom: 40, top: 15.r),
+              child: SizedBox(
+                width: ScreenUtil().setWidth(300),
+                height: ScreenUtil().setHeight(50),
+                child: CustomTextFormField(
+                  controller: useremail,
+                  hintText: 'Password',
+                  validator: (value) {
+                    if (value == null) {
+                      return 'Enter a valid password';
+                    }
+                    return null;
+                  },
+                  prefixIcon: Icon(Icons.car_rental,
+                      color: Color.fromARGB(255, 55, 22, 115), size: 30.r),
+                  fillcolor: Mycolor.textfield,
+                ),
+              ),
+            ),
+            Button.elevatedButton(
+                text: 'SIGNUP',
+                onPressed: () {
+                  if (formkey.currentState?.validate() ?? false) {
+                    print(username.text);
+                    print(useremail.text);
+                  }
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => UserLogin(),
+                      ));
+                }),
+            TextButton(
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => UserLogin(),
+                      ));
+                },
+                child: CustomText('Already have an Account? Login'))
+          ]),
+        ),
       ),
     ));
   }

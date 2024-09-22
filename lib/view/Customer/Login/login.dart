@@ -26,7 +26,7 @@ class _UserLoginState extends State<UserLogin> {
         title: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.only(bottom:15),
+              padding: const EdgeInsets.only(bottom: 15),
               child: Text(
                 'Welcome back ',
                 style: TextStyle(
@@ -56,14 +56,14 @@ class _UserLoginState extends State<UserLogin> {
             child: Container(
               color: Color.fromARGB(255, 251, 212, 167),
               alignment: Alignment.center,
-              height: ScreenUtil().setHeight(150),
+              height: ScreenUtil().setHeight(170),
               width: double.infinity,
             )),
       ),
       body: Column(
         children: [
           Padding(
-            padding: EdgeInsets.only(right: 90.r, top: 30.r),
+            padding: EdgeInsets.only(right: 90.r, top: 60.r),
             child: Text(
               'Signin to continue...',
               style: TextStyle(
@@ -74,7 +74,7 @@ class _UserLoginState extends State<UserLogin> {
             ),
           ),
           Padding(
-              padding: EdgeInsets.only(left: 0, top: 50.r),
+              padding: EdgeInsets.only(left: 0, top: 80.r),
               child: SizedBox(
                 width: ScreenUtil().setWidth(300),
                 height: ScreenUtil().setHeight(44),

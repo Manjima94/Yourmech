@@ -60,10 +60,10 @@ class _PaymentState extends State<Payment> {
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20)),
               title: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Container(
-                    height: 50.h,
+                    height: 60.h,
                     width: 80.w,
                     decoration: BoxDecoration(
                         image: DecorationImage(
@@ -71,7 +71,10 @@ class _PaymentState extends State<Payment> {
                         borderRadius: BorderRadius.circular(7),
                         border: Border.all(color: Mycolor.maincolor)),
                   ),
-                  CustomText('Visa/Master'),
+                  Padding(
+                    padding: EdgeInsets.only(left: 15.w),
+                    child: CustomText('Visa/Master'),
+                  ),
                 ],
               ),
               value: 1,
@@ -91,10 +94,10 @@ class _PaymentState extends State<Payment> {
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20)),
                 title: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Container(
-                      height: 50.h,
+                      height: 60.h,
                       width: 80.w,
                       decoration: BoxDecoration(
                           image: DecorationImage(
@@ -104,7 +107,10 @@ class _PaymentState extends State<Payment> {
                           borderRadius: BorderRadius.circular(7),
                           border: Border.all(color: Mycolor.maincolor)),
                     ),
-                    CustomText('Google Pay'),
+                    Padding(
+                      padding: EdgeInsets.only(left: 15.w),
+                      child: CustomText('Google Pay'),
+                    ),
                   ],
                 ),
                 value: 2,
@@ -123,10 +129,10 @@ class _PaymentState extends State<Payment> {
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20)),
               title: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Container(
-                    height: 50.h,
+                    height: 60.h,
                     width: 80.w,
                     decoration: BoxDecoration(
                         image: DecorationImage(
@@ -136,7 +142,10 @@ class _PaymentState extends State<Payment> {
                         borderRadius: BorderRadius.circular(7),
                         border: Border.all(color: Mycolor.maincolor)),
                   ),
-                  CustomText('  Paypal     '),
+                  Padding(
+                    padding: EdgeInsets.only(left: 10.w),
+                    child: CustomText('  Paypal     '),
+                  ),
                 ],
               ),
               value: 3,
@@ -150,43 +159,46 @@ class _PaymentState extends State<Payment> {
             Padding(
               padding: const EdgeInsets.only(top: 20, bottom: 200),
               child: RadioListTile(
-              visualDensity: VisualDensity(vertical: 4),
-              controlAffinity: ListTileControlAffinity.trailing,
-              tileColor: Colors.white,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20)),
-              title: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Container(
-                    height: 50.h,
-                    width: 80.w,
-                    decoration: BoxDecoration(
-                        image: DecorationImage(
-                            alignment: Alignment.center,
-                            fit: BoxFit.contain,
-                            image: AssetImage('assets/icons/cash.png')),
-                        borderRadius: BorderRadius.circular(7),
-                        border: Border.all(color: Mycolor.maincolor)),
-                  ),
-                  CustomText('Cash on hand'),
-                ],
+                visualDensity: VisualDensity(vertical: 4),
+                controlAffinity: ListTileControlAffinity.trailing,
+                tileColor: Colors.white,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20)),
+                title: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Container(
+                      height: 60.h,
+                      width: 80.w,
+                      decoration: BoxDecoration(
+                          image: DecorationImage(
+                              alignment: Alignment.center,
+                              fit: BoxFit.contain,
+                              image: AssetImage('assets/icons/cash.png')),
+                          borderRadius: BorderRadius.circular(7),
+                          border: Border.all(color: Mycolor.maincolor)),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(left: 15.w),
+                      child: CustomText('Cash on hand'),
+                    ),
+                  ],
+                ),
+                value: 4,
+                groupValue: Payment,
+                onChanged: (value) {
+                  setState(() {
+                    Payment = value!;
+                  });
+                },
               ),
-              value: 4,
-              groupValue: Payment,
-              onChanged: (value) {
-                setState(() {
-                  Payment = value!;
-                });
-              },
-            ),
             ),
             ElevatedButton(
               style: ButtonStyle(
                 shadowColor: MaterialStatePropertyAll(Mycolor.maincolor),
                 elevation: MaterialStatePropertyAll(5),
                 fixedSize: MaterialStatePropertyAll(Size(
-                    ScreenUtil().setWidth(250), ScreenUtil().setHeight(40))),
+                    ScreenUtil().setWidth(250), ScreenUtil().setHeight(45))),
                 shape: MaterialStatePropertyAll(
                   RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(15),
@@ -206,7 +218,7 @@ class _PaymentState extends State<Payment> {
                 style: TextStyle(
                     color: Mycolor.maincolor,
                     fontFamily: 'Poppins',
-                    fontSize: 22.sp,
+                    fontSize: 24.sp,
                     fontWeight: FontWeight.w500),
               ),
             ),

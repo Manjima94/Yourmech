@@ -1,7 +1,6 @@
-// ignore_for_file: prefer_const_constructors, file_names
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:yourmech/controller/Authentication/Mechlogin.dart';
 import 'package:yourmech/model/style/color.dart';
 import 'package:yourmech/model/widget/custom_button.dart';
 import 'package:yourmech/model/widget/custom_text.dart';
@@ -9,67 +8,74 @@ import 'package:yourmech/view/Mechanic/bottom.dart';
 import 'package:yourmech/view/Mechanic/signup.dart';
 
 class MechLogin extends StatefulWidget {
-  const MechLogin({super.key});
+  const MechLogin({Key? key}) : super(key: key);
 
   @override
   State<MechLogin> createState() => _MechLoginState();
 }
 
 class _MechLoginState extends State<MechLogin> {
-  var mechemail = TextEditingController();
+  final mechanicemail = TextEditingController();
+  final mechanicpassword = TextEditingController();
+  final formKey = GlobalKey<FormState>();
+  bool isLoading = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Image(
-              image: AssetImage('assets/images/clean.jpg'),
-              width: ScreenUtil().setWidth(double.infinity),
-              fit: BoxFit.cover,
-            ),
-            Padding(
-              padding: EdgeInsets.only(right: 160.r, top: 20.r, bottom: 10.r),
-              child: Text(
-                'Welcome back !',
-                style: TextStyle(
-                    fontFamily: 'Poppins',
-                    fontSize: 16.sp,
-                    color: Mycolor.maincolor,
-                    fontWeight: FontWeight.normal),
+        child: Form(
+          key: formKey,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Image(
+                image: AssetImage('assets/images/clean.jpg'),
+                width: ScreenUtil().setWidth(double.infinity),
+                fit: BoxFit.cover,
               ),
-            ),
-            Padding(
-              padding: EdgeInsets.only(right: 60.r, top: 0),
-              child: Text(
-                'Signin to continue...',
-                style: TextStyle(
-                    fontFamily: 'Poppins',
-                    fontSize: 24.sp,
-                    color: Mycolor.maincolor,
-                    fontWeight: FontWeight.normal),
+              Padding(
+                padding: EdgeInsets.only(right: 160.r, top: 20.r, bottom: 10.r),
+                child: Text(
+                  'Welcome back!',
+                  style: TextStyle(
+                      fontFamily: 'Poppins',
+                      fontSize: 18.sp,
+                      color: Mycolor.maincolor,
+                      fontWeight: FontWeight.normal),
+                ),
               ),
-            ),
-            Padding(
+              Padding(
+                padding: EdgeInsets.only(right: 60.r),
+                child: Text(
+                  'Signin to continue...',
+                  style: TextStyle(
+                      fontFamily: 'Poppins',
+                      fontSize: 24.sp,
+                      color: Mycolor.maincolor,
+                      fontWeight: FontWeight.normal),
+                ),
+              ),
+              Padding(
                 padding: EdgeInsets.only(left: 0, top: 20.r),
                 child: SizedBox(
                   width: ScreenUtil().setWidth(300),
-                  height: ScreenUtil().setHeight(44),
+                  height: ScreenUtil().setHeight(70),
                   child: TextFormField(
                     validator: (value) {
-                      if (value == null) {
-                        return 'Incorrect password';
+                      if (value == null || value.isEmpty) {
+                        return 'Enter a valid email';
                       }
                       return null;
                     },
-                    controller: mechemail,
+                    controller: mechanicemail,
                     decoration: InputDecoration(
                       border: OutlineInputBorder(
-                          borderSide: BorderSide.none,
-                          borderRadius: BorderRadius.circular(10.r)),
+                        borderSide: BorderSide.none,
+                        borderRadius: BorderRadius.circular(10.r),
+                      ),
                       filled: true,
-                      fillColor:  Color(0xff5C4685),
+                      fillColor: Color(0xff5C4685),
                       contentPadding: EdgeInsets.all(20.r),
                       prefixIcon: Icon(
                         Icons.mail_rounded,
@@ -82,24 +88,26 @@ class _MechLoginState extends State<MechLogin> {
                           fontWeight: FontWeight.w400),
                     ),
                   ),
-                )),
-            Padding(
-              padding: EdgeInsets.only(left: 0, top: 20.r),
-              child: SizedBox(
-                width: ScreenUtil().setWidth(300),
-                height: ScreenUtil().setHeight(44),
-                child:  TextFormField(
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.only(left: 0, top: 20.r),
+                child: SizedBox(
+                  width: ScreenUtil().setWidth(300),
+                  height: ScreenUtil().setHeight(70),
+                  child: TextFormField(
                     validator: (value) {
-                      if (value == null) {
+                      if (value == null || value.isEmpty) {
                         return 'Incorrect password';
                       }
                       return null;
                     },
-                    controller: mechemail,
+                    controller: mechanicpassword,
                     decoration: InputDecoration(
                       border: OutlineInputBorder(
-                          borderSide: BorderSide.none,
-                          borderRadius: BorderRadius.circular(10.r)),
+                        borderSide: BorderSide.none,
+                        borderRadius: BorderRadius.circular(10.r),
+                      ),
                       filled: true,
                       fillColor: Color(0xff5C4685),
                       contentPadding: EdgeInsets.all(20.r),
@@ -114,43 +122,52 @@ class _MechLoginState extends State<MechLogin> {
                           fontWeight: FontWeight.w400),
                     ),
                   ),
+                ),
               ),
-            ),
-            Padding(
-              padding: EdgeInsets.only(left: 170.r, top: 10.r, bottom: 20.r),
-              child: CustomText(
-                'Lost your keys ?',
-                color: Mycolor.maincolor,
-              ),
-            ),
-            Button.elevatedButton(
-                text: 'LOGIN',
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => Bottomnavigation(),
-                      ));
-                }),
-            Padding(
-              padding: EdgeInsets.only(left: 0, top: 10.r, bottom: 0),
-              child: TextButton(
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => Signup(),
-                      ));
-                },
+              Padding(
+                padding: EdgeInsets.only(left: 170.r, top: 40.r, bottom: 20.r),
                 child: CustomText(
-                  ' Don’t have an account?  Signup',
+                  'Lost your keys?',
                   color: Mycolor.maincolor,
                 ),
               ),
-            ),
-            Padding(
-              padding: EdgeInsets.only(left: 00, top: 10.r, bottom: 0.r),
-              child: Expanded(
+              if (isLoading) CircularProgressIndicator(),
+              if (!isLoading)
+                Button.elevatedButton(
+                  text: 'LOGIN',
+                  onPressed: ()  {
+                    // if (formKey.currentState!.validate()) {
+                    //   Loginmech mechLoginInstance = Loginmech();
+                    //   await mechLoginInstance.mechLogin(context);
+
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => Bottomnavigation(),
+                        ),
+                      );
+                    
+                  },
+                ),
+              Padding(
+                padding: EdgeInsets.only(left: 0, top: 10.r, bottom: 0),
+                child: TextButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => Signup(),
+                      ),
+                    );
+                  },
+                  child: CustomText(
+                    'Don’t have an account? Signup',
+                    color: Mycolor.maincolor,
+                  ),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.only(left: 0, top: 10.r, bottom: 0.r),
                 child: Row(
                   children: [
                     SizedBox(
@@ -182,24 +199,21 @@ class _MechLoginState extends State<MechLogin> {
                   ],
                 ),
               ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-               
-                Padding(
-                  padding: EdgeInsets.only(right: 0, top: 10, bottom: 0.r),
-                  child: Image(
-                    height: 40.h,
-                    image: AssetImage('assets/icons/google.png'),
-                    fit: BoxFit.cover,
-                  ),
-                )
-              ],
-            )
-
-           
-          ],
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Padding(
+                    padding: EdgeInsets.only(right: 0, top: 10, bottom: 0.r),
+                    child: Image(
+                      height: 40.h,
+                      image: AssetImage('assets/icons/google.png'),
+                      fit: BoxFit.cover,
+                    ),
+                  )
+                ],
+              )
+            ],
+          ),
         ),
       ),
     );

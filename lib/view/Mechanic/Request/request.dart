@@ -43,7 +43,7 @@ class _MechRequestsState extends State<MechRequests> {
             padding: EdgeInsets.only(left: 0.r, top: 30.r, bottom: 20.r),
             child: Container(
               width: ScreenUtil().setWidth(300),
-              height: ScreenUtil().setHeight(40),
+              height: ScreenUtil().setHeight(50),
               decoration: BoxDecoration(
                   color: Colors.white, borderRadius: BorderRadius.circular(15)),
               child: TabBar(

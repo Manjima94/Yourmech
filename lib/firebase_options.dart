@@ -85,4 +85,5 @@ class DefaultFirebaseOptions {
     storageBucket: 'yourmech-73806.appspot.com',
     measurementId: 'G-BMKX3H1JCT',
   );
+
 }

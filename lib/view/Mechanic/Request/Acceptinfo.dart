@@ -31,7 +31,7 @@ class _AcceptInfoState extends State<AcceptInfo> {
               color: Colors.white,
             ),
             child: Padding(
-              padding: const EdgeInsets.only(top: 150),
+              padding: const EdgeInsets.only(top: 70),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -39,6 +39,10 @@ class _AcceptInfoState extends State<AcceptInfo> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
+                      Padding(
+                        padding: const EdgeInsets.only(left: 50,bottom: 30),
+                        child: CircleAvatar(radius: 50,),
+                      ),
                       Padding(
                         padding: EdgeInsets.all(8),
                         child: CustomText('Service :'),
@@ -99,22 +103,8 @@ class _AcceptInfoState extends State<AcceptInfo> {
             ),
           ),
         ),
-        Padding(
-          padding: EdgeInsets.only(bottom: 0, top: 19.r),
-          child: Container(
-            height: ScreenUtil().setHeight(105),
-            decoration:
-                BoxDecoration(color: Mycolor.maincolor, shape: BoxShape.circle),
-          ),
-        ),
-        Align(
-            alignment: Alignment.topCenter,
-            child: Padding(
-              padding: EdgeInsets.all(24.r),
-              child: CircleAvatar(
-                radius: 51.r,
-              ),
-            )),
+        
+        
       ]),
     );
   }

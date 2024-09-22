@@ -38,7 +38,7 @@ class _MainpageState extends State<Mainpage> {
                 child: Image(
                     image: AssetImage('assets/images/mechcus.png'),
                     width: ScreenUtil().setWidth(double.infinity),
-                     height: 330.h,
+                    height: 330.h,
                     fit: BoxFit.cover),
               ),
               Align(
@@ -65,7 +65,7 @@ class _MainpageState extends State<Mainpage> {
                 'Welcome to Yourmech...',
                 style: TextStyle(
                     fontFamily: 'InknutAntiqua',
-                    fontSize: 22.sp,
+                    fontSize: 22.spMin,
                     color: Mycolor.maincolor,
                     fontWeight: FontWeight.bold),
               ),
@@ -76,7 +76,7 @@ class _MainpageState extends State<Mainpage> {
                 'Who you are ?',
                 style: TextStyle(
                     fontFamily: 'Poppins',
-                    fontSize: 20.sp,
+                    fontSize: 20.spMin,
                     color: Mycolor.maincolor,
                     fontWeight: FontWeight.normal),
               ),
@@ -97,7 +97,7 @@ class _MainpageState extends State<Mainpage> {
                     child: Container(
                       padding: EdgeInsets.only(top: 15),
                       alignment: Alignment.bottomCenter,
-                      height: ScreenUtil().setHeight(125),
+                      height: ScreenUtil().setHeight(135),
                       width: ScreenUtil().setWidth(110),
                       decoration: BoxDecoration(
                           image: DecorationImage(
@@ -105,7 +105,8 @@ class _MainpageState extends State<Mainpage> {
                               alignment: Alignment.center,
                               image: AssetImage('assets/images/mechanic.jpg')),
                           border: Border.all(
-                              color: Color.fromARGB(255, 237, 132, 12), width: 2),
+                              color: Color.fromARGB(255, 237, 132, 12),
+                              width: 2),
                           borderRadius: BorderRadius.circular(15)),
                       child: CustomText('Mechanic'),
                     ),
@@ -120,14 +121,15 @@ class _MainpageState extends State<Mainpage> {
                     },
                     child: Container(
                       alignment: Alignment.bottomCenter,
-                      height: 125.h,
+                      height: 135.h,
                       width: 110.w,
                       decoration: BoxDecoration(
                           image: DecorationImage(
                               alignment: Alignment.center,
                               image: AssetImage('assets/images/users.png')),
                           border: Border.all(
-                              color: Color.fromARGB(255, 237, 132, 12), width: 2),
+                              color: Color.fromARGB(255, 237, 132, 12),
+                              width: 2),
                           borderRadius: BorderRadius.circular(15)),
                       child: CustomText('Customer'),
                     ),

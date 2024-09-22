@@ -34,7 +34,7 @@ class _MechTabRequestState extends State<MechTabRequest> {
                   (BuildContext context, VoidCallback openContainer) {
                 return ListTile(
                   contentPadding:
-                      REdgeInsets.symmetric(horizontal: 30.r, vertical: 0.r),
+                      REdgeInsets.symmetric(horizontal: 10.r, vertical: 0.r),
                   tileColor: Colors.white,
                   shape: ContinuousRectangleBorder(
                       borderRadius: BorderRadius.circular(0.r)),

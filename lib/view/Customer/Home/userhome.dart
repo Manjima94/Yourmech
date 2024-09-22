@@ -202,7 +202,7 @@ class _UserHomeState extends State<UserHome> {
                     style: TextStyle(
                         color: Color.fromARGB(255, 252, 252, 252),
                         fontFamily: 'Poppins',
-                        fontSize: 14.sp,
+                        fontSize: 13.sp,
                         fontWeight: FontWeight.w600),
                   ),
                 ),

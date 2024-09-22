@@ -30,7 +30,7 @@ class _AdminHomeState extends State<AdminHome> {
           children: [
             Container(
               width: ScreenUtil().setWidth(300),
-              height: ScreenUtil().setHeight(40),
+              height: ScreenUtil().setHeight(50),
               decoration: BoxDecoration(
                   color: Colors.white, borderRadius: BorderRadius.circular(15)),
               child: TabBar(
@@ -46,7 +46,7 @@ class _AdminHomeState extends State<AdminHome> {
                       style: TextStyle(
                           fontFamily: 'Poppins',
                           // color:Mycolor.maincolor,
-                          fontSize: 20,
+                          fontSize: 20.spMin,
                           fontWeight: FontWeight.w600),
                     ),
                     Text(
