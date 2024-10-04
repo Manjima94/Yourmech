@@ -1,16 +1,17 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:yourmech/model/style/color.dart';
 
 class CustomText extends StatelessWidget {
   final Color? color;
   final String text;
+  final double? size;
 
   const CustomText(
     this.text, {
     this.color,
+     this.size,
     super.key,
   });
 
@@ -19,7 +20,7 @@ class CustomText extends StatelessWidget {
     return Text(
       text,
       style: TextStyle(
-        fontSize: 18.sp,
+       fontSize: size,
         color: Mycolor.maincolor,
         fontFamily: 'Poppins',
       ),

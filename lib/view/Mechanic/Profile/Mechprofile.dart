@@ -1,10 +1,13 @@
 // ignore_for_file: prefer_const_constructors
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:yourmech/model/style/color.dart';
 import 'package:yourmech/model/widget/custom_heading.dart';
 import 'package:yourmech/model/widget/custom_text.dart';
+import 'package:yourmech/view/Mechanic/Login.dart';
 import 'package:yourmech/view/Mechanic/Profile/profileedit.dart';
 
 class MechProfile extends StatefulWidget {
@@ -15,6 +18,47 @@ class MechProfile extends StatefulWidget {
 }
 
 class _MechProfileState extends State<MechProfile> {
+  String mechname = '';
+    String mechmobile = '';
+      String mechlocation = '';
+        String mechtyre = '';
+          String mechnshopname = '';
+          
+  Future<void> fetchmechDetail() async {
+    try {
+      SharedPreferences pref = await SharedPreferences.getInstance();
+      String? mechId = pref.getString('Mechuid');
+      print('SharedPreferences std Id: $mechId');
+      if (mechId != null && mechId.isNotEmpty) {
+        DocumentSnapshot mechSnapshot = await FirebaseFirestore.instance
+            .collection('mechanics')
+            .doc(mechId)
+            .get();
+  if (mechSnapshot.exists) {
+          setState(() {
+            mechname = mechSnapshot['name'] ?? '';
+            mechmobile = mechSnapshot['mobile'] ?? '';
+            mechlocation = mechSnapshot['location'] ?? '';
+            mechnshopname = mechSnapshot['shopname'] ?? '';
+            mechtyre = mechSnapshot['vehicle_type'] ?? '';
+          
+          });
+        }
+      }
+    } catch (e) {
+      print('Error fetching student details: $e');
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Error fetching student details.')),
+      );
+    }
+  }
+
+
+  void initState() {
+    super.initState();
+   
+    fetchmechDetail();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -70,11 +114,11 @@ class _MechProfileState extends State<MechProfile> {
                 ),
               ],
             ),
-            CustomText('Name'),
+            CustomText(mechname,size: 18.spMin,),
             Row(
-              children: const [
+              children:  [
                 Padding(
-                  padding: EdgeInsets.only(left: 50, top: 20),
+                  padding: EdgeInsets.only(left: 50, top: 27),
                   child: Column(
                     children: [
                       Padding(
@@ -105,36 +149,23 @@ class _MechProfileState extends State<MechProfile> {
                           color: Mycolor.maincolor,
                         ),
                       ),
+                     
                       Padding(
-                        padding: EdgeInsets.all(10),
-                        child: Icon(
-                          Icons.build,
-                          color: Mycolor.maincolor,
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.all(10),
-                        child: Icon(
-                          Icons.business_center_rounded,
-                          color: Mycolor.maincolor,
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.all(10),
+                        padding: EdgeInsets.all(13),
                         child: Icon(
                           Icons.directions_run_rounded,
                           color: Mycolor.maincolor,
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsets.all(10),
+                        padding: EdgeInsets.all(13),
                         child: Icon(
                           Icons.live_help_sharp,
                           color: Mycolor.maincolor,
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsets.all(10),
+                        padding: EdgeInsets.all(12),
                         child: Icon(
                           Icons.info_outlined,
                           color: Mycolor.maincolor,
@@ -143,34 +174,96 @@ class _MechProfileState extends State<MechProfile> {
                     ],
                   ),
                 ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.all(8),
-                      child: CustomText(''),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: CustomText(''),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: CustomText(''),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: CustomText(''),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: CustomText(''),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: CustomText(''),
-                    ),
-                  ],
+                Padding(
+                  padding: const EdgeInsets.only(top: 27),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.all(10),
+                        child: CustomText(mechmobile,size: 18.spMin),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.all(10),
+                        child: CustomText(mechlocation,size: 18.spMin),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.all(10),
+                        child: CustomText(mechnshopname,size: 18.spMin),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.all(13),
+                       child: CustomText(mechtyre,size: 18.spMin),
+                      ),
+                     
+                       Padding(
+                        padding: EdgeInsets.all(0),
+                        child: TextButton(
+                          child: Text(
+                            'Logout',
+                            style: TextStyle(
+                              fontSize: 18.spMin,
+                              color: Mycolor.maincolor,
+                              fontFamily: 'Poppins',
+                            ),
+                          ),
+                          onPressed: () {
+                            showDialog(
+                              context: context,
+                              builder: (context) {
+                                return AlertDialog(
+                                  titlePadding: EdgeInsets.all(25),
+                                  backgroundColor: Mycolor.background,
+                                  title: Text(
+                                    'Are you sure?',
+                                    style: TextStyle(
+                                      color: Mycolor.maincolor,
+                                      fontFamily: 'Poppins',
+                                      fontSize: 20.sp,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                                  actions: [
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceAround,
+                                      children: [
+                                        ElevatedButton(
+                                          onPressed: () {
+                                            Navigator.pop(context);
+                                          },
+                                          child: CustomText('No'),
+                                        ),
+                                        ElevatedButton(
+                                          onPressed: () {
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) => MechLogin(),
+                                              ),
+                                            );
+                                          },
+                                          child: CustomText('Logout'),
+                                        )
+                                      ],
+                                    )
+                                  ],
+                                );
+                              },
+                            );
+                          },
+                        ),
+                   
+                      ), Padding(
+                        padding: EdgeInsets.all(8),
+                        child: CustomText('Help',size: 18.spMin),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.all(8),
+                        child: CustomText('About',size: 18.spMin),
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),

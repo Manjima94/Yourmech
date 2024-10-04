@@ -1,8 +1,12 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:yourmech/controller/User/Signup.dart';
 import 'package:yourmech/model/style/color.dart';
 import 'package:yourmech/model/widget/custom_button.dart';
 import 'package:yourmech/model/widget/custom_text.dart';
@@ -17,12 +21,45 @@ class UserSignup extends StatefulWidget {
 }
 
 class _UserSignupState extends State<UserSignup> {
+  final userSignupController = UserSignupController();
+  final formkey = GlobalKey<FormState>();
   var useremail = TextEditingController();
   var userpassword = TextEditingController();
   var username = TextEditingController();
   var usermobile = TextEditingController();
   var userlocation = TextEditingController();
-  var formkey = GlobalKey<FormState>();
+
+  Future<void> signupuser() async {
+    if (formkey.currentState!.validate()) {
+      try {
+        UserCredential userCredential = await FirebaseAuth.instance
+            .createUserWithEmailAndPassword(
+                email: useremail.text, password: userpassword.text);
+        String useruid = userCredential.user!.uid;
+        await FirebaseFirestore.instance
+            .collection('Customers')
+            .doc(useruid)
+            .set({
+          'Username': username.text,
+          'Useremail': useremail.text,
+          'Userpassword': userpassword.text,
+          'Userlocation': userlocation.text,
+          'Usermobile': usermobile.text,
+          'Useruid': useruid
+        });
+
+        SharedPreferences pref = await SharedPreferences.getInstance();
+        await pref.setString('Useruid', useruid);
+
+        print('signed up successfully!');
+      } catch (e) {
+        print('Failed to sign up : $e'); 
+      }
+    }
+  }
+
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -99,7 +136,7 @@ class _UserSignupState extends State<UserSignup> {
                 width: ScreenUtil().setWidth(300),
                 height: ScreenUtil().setHeight(50),
                 child: CustomTextFormField(
-                  controller: userpassword,
+                  controller: userlocation,
                   hintText: 'Location',
                   validator: (value) {
                     if (value == null) {
@@ -139,7 +176,7 @@ class _UserSignupState extends State<UserSignup> {
                 width: ScreenUtil().setWidth(300),
                 height: ScreenUtil().setHeight(50),
                 child: CustomTextFormField(
-                  controller: useremail,
+                  controller: userpassword,
                   hintText: 'Password',
                   validator: (value) {
                     if (value == null) {
@@ -156,10 +193,7 @@ class _UserSignupState extends State<UserSignup> {
             Button.elevatedButton(
                 text: 'SIGNUP',
                 onPressed: () {
-                  if (formkey.currentState?.validate() ?? false) {
-                    print(username.text);
-                    print(useremail.text);
-                  }
+                  signupuser();
                   Navigator.push(
                       context,
                       MaterialPageRoute(
