@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 
 import 'package:animated_snack_bar/animated_snack_bar.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -16,6 +17,24 @@ class EmergRequest extends StatefulWidget {
 }
 
 class _EmergRequestState extends State<EmergRequest> {
+  var name = TextEditingController();
+  var vehiclemodel = TextEditingController();
+  var service = TextEditingController();
+  var location = TextEditingController();
+  var phone = TextEditingController();
+
+  Future<void> EmergencyRequest() async {
+    await FirebaseFirestore.instance.collection('Emergency Request').doc().set({
+      'Name': name.text,
+      'Vehiclemodel': vehiclemodel.text,
+      'Service': service.text,
+      'Location': location.text,
+      'Phone': phone.text,
+    });
+    Navigator.pop(context);
+  
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,6 +60,7 @@ class _EmergRequestState extends State<EmergRequest> {
             children: [
               CustomText('Enter your details :\n'),
               TextFormField(
+                controller: name,
                 decoration: InputDecoration(
                     hintText: 'Enter Your Name ',
                     hintStyle: TextStyle(fontFamily: 'Poppins'),
@@ -53,6 +73,7 @@ class _EmergRequestState extends State<EmergRequest> {
               Padding(
                 padding: const EdgeInsets.only(top: 15, bottom: 15),
                 child: TextFormField(
+                  controller: vehiclemodel,
                   decoration: InputDecoration(
                       hintText: ' Vehicle model',
                       hintStyle: TextStyle(fontFamily: 'Poppins'),
@@ -64,6 +85,7 @@ class _EmergRequestState extends State<EmergRequest> {
                 ),
               ),
               TextFormField(
+                controller: service,
                 decoration: InputDecoration(
                     hintText: 'What service do you need ?',
                     hintStyle: TextStyle(fontFamily: 'Poppins'),
@@ -76,6 +98,7 @@ class _EmergRequestState extends State<EmergRequest> {
               Padding(
                 padding: const EdgeInsets.only(top: 15, bottom: 15),
                 child: TextFormField(
+                  controller: location,
                   decoration: InputDecoration(
                       hintText: ' Location',
                       hintStyle: TextStyle(fontFamily: 'Poppins'),
@@ -89,6 +112,7 @@ class _EmergRequestState extends State<EmergRequest> {
               Padding(
                 padding: const EdgeInsets.only(bottom: 30),
                 child: TextFormField(
+                  controller: phone,
                   decoration: InputDecoration(
                       hintText: 'Contact No',
                       hintStyle: TextStyle(fontFamily: 'Poppins'),
@@ -101,7 +125,7 @@ class _EmergRequestState extends State<EmergRequest> {
               ),
               Center(
                 child: Padding(
-                  padding: EdgeInsets.only(bottom: 20.r, top: 0),
+                  padding: EdgeInsets.only(bottom: 20.r, top: 20),
                   child: Container(
                     height: 150.h,
                     width: 200.h,
@@ -121,7 +145,8 @@ class _EmergRequestState extends State<EmergRequest> {
                   child: Button.elevatedButton(
                       text: 'Send',
                       onPressed: () {
-                        AnimatedSnackBar.material('Booking Requested',
+                        EmergencyRequest();
+                        AnimatedSnackBar.material('emergency Requested',
                                 mobileSnackBarPosition:
                                     MobileSnackBarPosition.bottom,
                                 type: AnimatedSnackBarType.success)

@@ -171,9 +171,9 @@ class _UserLoginState extends State<UserLogin> {
               ),
             ),
           ),
-          Padding(
-            padding: EdgeInsets.only(left: 00, top: 10, bottom: 5.r),
-            child: Expanded(
+          Expanded(
+            child: Padding(
+              padding: EdgeInsets.only(left: 00, top: 10, bottom: 5.r),
               child: Row(
                 children: [
                   SizedBox(

@@ -38,11 +38,11 @@ class _UserProfileState extends State<UserProfile> {
 
         if (usersnapshot.exists) {
           setState(() {
-            username = usersnapshot['userName'] ?? "";
-            useremail = usersnapshot['userEmail'] ?? "";
-            usercontact = usersnapshot['userMobile'] ?? "";
-            userlocation = usersnapshot['userLocation'] ?? '';
-            userpassword = usersnapshot['userPassword'] ?? '';
+            username = usersnapshot['Username'] ?? "";
+            useremail = usersnapshot['Useremail'] ?? "";
+            usercontact = usersnapshot['Usermobile'] ?? "";
+            userlocation = usersnapshot['Userlocation'] ?? '';
+            userpassword = usersnapshot['Userpassword'] ?? '';
           });
         }
       }

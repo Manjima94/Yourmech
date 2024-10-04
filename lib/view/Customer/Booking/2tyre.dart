@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:yourmech/model/style/color.dart';
+import 'package:yourmech/model/widget/custom_text.dart';
 import 'package:yourmech/view/Customer/Booking/mechinfo.dart';
 
 class Twotyre extends StatefulWidget {
@@ -19,16 +20,16 @@ class _TwotyreState extends State<Twotyre> {
       backgroundColor: Mycolor.background,
       body: StreamBuilder(
           stream: FirebaseFirestore.instance
-              .collection('Mechanics')
-              .where('VehicleType', isEqualTo: '2 Wheeler')
+              .collection('mechanics')
+              .where('vehicle_type', whereIn: ['2 tyre', 'Both'])
               .snapshots(),
           builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
-            // Handle loading state
+           
             if (snapshot.connectionState == ConnectionState.waiting) {
               return const Center(child: CircularProgressIndicator());
             }
 
-            // Handle errors
+           
             if (snapshot.hasError) {
               return const Center(child: Text('Error fetching data.'));
             }
@@ -63,8 +64,8 @@ class _TwotyreState extends State<Twotyre> {
                             title: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(twotyre['MechName']),
-                                Text(twotyre['MechLocation']),
+                                CustomText(twotyre['name']),
+                                CustomText(twotyre['location']),
                                 Text('***'),
                               ],
                             ),
