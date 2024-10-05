@@ -1,12 +1,17 @@
 
 import 'package:animations/animations.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:yourmech/model/style/color.dart';
+import 'package:yourmech/model/widget/custom_text.dart';
+import 'package:yourmech/view/Customer/Requests/requestinfo.dart';
 import 'package:yourmech/view/Mechanic/Request/RequestInfo.dart';
 
+  
 class TabRequest extends StatefulWidget {
-  const TabRequest({super.key});
+   
+  const TabRequest({super.key, });
 
   @override
   State<TabRequest> createState() => _TabRequestState();
@@ -16,9 +21,19 @@ class _TabRequestState extends State<TabRequest> {
   @override
   Widget build(BuildContext context) {
     return  Scaffold ( backgroundColor: Mycolor.background,
-      body: ListView.builder(
-        itemCount: 2,
-        itemBuilder: (context, index) {
+     body: StreamBuilder(
+            stream: FirebaseFirestore.instance
+                .collection('Booking Request')
+                .snapshots(),
+            builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
+              if (!snapshot.hasData) {
+                return Center(child: CircularProgressIndicator());
+              }
+
+              return ListView.builder(
+         itemCount: snapshot.data!.docs.length,
+                itemBuilder: (context, index) {
+                  var booking = snapshot.data!.docs[index];
           return Padding(
             padding: const EdgeInsets.only(top: 20, left: 20, right: 20),
             child: OpenContainer(
@@ -34,12 +49,12 @@ class _TabRequestState extends State<TabRequest> {
                   tileColor: Colors.white,
                   shape: ContinuousRectangleBorder(
                       borderRadius: BorderRadius.circular(0.r)),
-                  title: const Column(
+                  title:  Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('Name'),
-                      Text('Problem'),
-                      Text('Location'),
+                   CustomText(booking['Service']),
+                              CustomText(booking['Date']), CustomText(booking['Time']),
+                              
                     ],
                   ),
                   leading: CircleAvatar(
@@ -49,14 +64,15 @@ class _TabRequestState extends State<TabRequest> {
                 );
               },
               openBuilder: (BuildContext context, VoidCallback _) {
-                return const RequestInfo();
+                return const BookRequestInfo(service: '', vehicle: '', date: '', time: '', location: '', contact: '',);
               },
             ),
           );
 
        
         },
-      ),
+      );
+            })
     );
   }
 }

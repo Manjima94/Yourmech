@@ -1,4 +1,6 @@
 // ignore_for_file: prefer_const_constructors
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
@@ -9,7 +11,7 @@ import 'package:yourmech/model/widget/custom_heading.dart';
 import 'package:yourmech/model/widget/custom_text.dart';
 import 'package:yourmech/view/Mechanic/Login.dart';
 import 'package:yourmech/view/Mechanic/Profile/profileedit.dart';
-
+import  'package:image_picker/image_picker.dart';
 class MechProfile extends StatefulWidget {
   const MechProfile({super.key});
 
@@ -24,6 +26,25 @@ class _MechProfileState extends State<MechProfile> {
         String mechtyre = '';
           String mechnshopname = '';
           
+          XFile? pick;
+  File? image;
+  String? imageUrl;
+
+  Future<void> addImage() async {
+    try {
+      ImagePicker picked = ImagePicker();
+      pick = await picked.pickImage(source: ImageSource.gallery);
+      if (pick != null) {
+        setState(() {
+          image = File(pick!.path);
+        });
+      }
+    } catch (e) {
+      print("error : $e");
+    }
+  }
+
+
   Future<void> fetchmechDetail() async {
     try {
       SharedPreferences pref = await SharedPreferences.getInstance();

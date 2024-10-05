@@ -5,34 +5,89 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:uuid/uuid.dart';
 import 'package:yourmech/model/style/color.dart';
 import 'package:yourmech/model/widget/custom_button.dart';
 import 'package:yourmech/model/widget/custom_text.dart';
 
 class EmergRequest extends StatefulWidget {
-  const EmergRequest({super.key});
+  final String name;
+  final String vehiclemodel;
+  final String service;
+  final String location;
+  final String phone;
+
+  EmergRequest({
+    Key? key,
+    this.name = '',
+    this.vehiclemodel = '',
+    this.service = '',
+    this.location = '',
+    this.phone = '',
+  }) : super(key: key);
 
   @override
   State<EmergRequest> createState() => _EmergRequestState();
 }
 
 class _EmergRequestState extends State<EmergRequest> {
-  var name = TextEditingController();
-  var vehiclemodel = TextEditingController();
-  var service = TextEditingController();
-  var location = TextEditingController();
-  var phone = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
+  bool isSubmitting = false;
+
+  late TextEditingController nameController;
+  late TextEditingController vehicleModelController;
+  late TextEditingController serviceController;
+  late TextEditingController locationController;
+  late TextEditingController phoneController;
+
+  @override
+  void initState() {
+    super.initState();
+    nameController = TextEditingController(text: widget.name);
+    vehicleModelController = TextEditingController(text: widget.vehiclemodel);
+    serviceController = TextEditingController(text: widget.service);
+    locationController = TextEditingController(text: widget.location);
+    phoneController = TextEditingController(text: widget.phone);
+  }
+
+  @override
+  void dispose() {
+    nameController.dispose();
+    vehicleModelController.dispose();
+    serviceController.dispose();
+    locationController.dispose();
+    phoneController.dispose();
+    super.dispose();
+  }
 
   Future<void> EmergencyRequest() async {
-    await FirebaseFirestore.instance.collection('Emergency Request').doc().set({
-      'Name': name.text,
-      'Vehiclemodel': vehiclemodel.text,
-      'Service': service.text,
-      'Location': location.text,
-      'Phone': phone.text,
+    if (!_formKey.currentState!.validate()) {
+      return;
+    }
+    setState(() {
+      isSubmitting = true;
     });
-    Navigator.pop(context);
-  
+
+    try {
+      await FirebaseFirestore.instance
+          .collection('Emergency Request')
+          .doc()
+          .set({
+        'Name': nameController.text,
+        'Vehiclemodel': vehicleModelController.text,
+        'Service': serviceController.text,
+        'Location': locationController.text,
+        'Phone': phoneController.text,
+      });
+
+      Navigator.pop(context);
+    } catch (e) {
+      AnimatedSnackBar.material('Failed to submit request: $e',
+              mobileSnackBarPosition: MobileSnackBarPosition.bottom,
+              type: AnimatedSnackBarType.error)
+          .show(context);
+    } 
   }
 
   @override
@@ -55,27 +110,16 @@ class _EmergRequestState extends State<EmergRequest> {
         ),
         body: Padding(
           padding: EdgeInsets.only(left: 30.r, top: 20.r, right: 30.r),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              CustomText('Enter your details :\n'),
-              TextFormField(
-                controller: name,
-                decoration: InputDecoration(
-                    hintText: 'Enter Your Name ',
-                    hintStyle: TextStyle(fontFamily: 'Poppins'),
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20),
-                        borderSide: BorderSide.none),
-                    fillColor: Colors.white,
-                    filled: true),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 15, bottom: 15),
-                child: TextFormField(
-                  controller: vehiclemodel,
+          child: Form(
+            key: _formKey,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                CustomText('Enter your details :\n'),
+                TextFormField(
+                  controller: nameController,
                   decoration: InputDecoration(
-                      hintText: ' Vehicle model',
+                      hintText: 'Enter Your Name ',
                       hintStyle: TextStyle(fontFamily: 'Poppins'),
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(20),
@@ -83,24 +127,24 @@ class _EmergRequestState extends State<EmergRequest> {
                       fillColor: Colors.white,
                       filled: true),
                 ),
-              ),
-              TextFormField(
-                controller: service,
-                decoration: InputDecoration(
-                    hintText: 'What service do you need ?',
-                    hintStyle: TextStyle(fontFamily: 'Poppins'),
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20),
-                        borderSide: BorderSide.none),
-                    fillColor: Colors.white,
-                    filled: true),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 15, bottom: 15),
-                child: TextFormField(
-                  controller: location,
+                Padding(
+                  padding: const EdgeInsets.only(top: 15, bottom: 15),
+                  child: TextFormField(
+                    controller: vehicleModelController,
+                    decoration: InputDecoration(
+                        hintText: ' Vehicle model',
+                        hintStyle: TextStyle(fontFamily: 'Poppins'),
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20),
+                            borderSide: BorderSide.none),
+                        fillColor: Colors.white,
+                        filled: true),
+                  ),
+                ),
+                TextFormField(
+                  controller: serviceController,
                   decoration: InputDecoration(
-                      hintText: ' Location',
+                      hintText: 'What service do you need ?',
                       hintStyle: TextStyle(fontFamily: 'Poppins'),
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(20),
@@ -108,51 +152,65 @@ class _EmergRequestState extends State<EmergRequest> {
                       fillColor: Colors.white,
                       filled: true),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(bottom: 30),
-                child: TextFormField(
-                  controller: phone,
-                  decoration: InputDecoration(
-                      hintText: 'Contact No',
-                      hintStyle: TextStyle(fontFamily: 'Poppins'),
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(20),
-                          borderSide: BorderSide.none),
-                      fillColor: Colors.white,
-                      filled: true),
+                Padding(
+                  padding: const EdgeInsets.only(top: 15, bottom: 15),
+                  child: TextFormField(
+                    controller: locationController,
+                    decoration: InputDecoration(
+                        hintText: ' Location',
+                        hintStyle: TextStyle(fontFamily: 'Poppins'),
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20),
+                            borderSide: BorderSide.none),
+                        fillColor: Colors.white,
+                        filled: true),
+                  ),
                 ),
-              ),
-              Center(
-                child: Padding(
-                  padding: EdgeInsets.only(bottom: 20.r, top: 20),
-                  child: Container(
-                    height: 150.h,
-                    width: 200.h,
-                    decoration: BoxDecoration(
-                        border: Border.all(),
-                        borderRadius: BorderRadius.circular(20)),
-                    child: IconButton(
-                      onPressed: () {},
-                      icon: Icon(Icons.add_photo_alternate_outlined),
-                      iconSize: 50,
-                      color: Mycolor.maincolor,
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 30),
+                  child: TextFormField(
+                    controller: phoneController,
+                    decoration: InputDecoration(
+                        hintText: 'Contact No',
+                        hintStyle: TextStyle(fontFamily: 'Poppins'),
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20),
+                            borderSide: BorderSide.none),
+                        fillColor: Colors.white,
+                        filled: true),
+                  ),
+                ),
+                Center(
+                  child: Padding(
+                    padding: EdgeInsets.only(bottom: 20.r, top: 20),
+                    child: Container(
+                      height: 150.h,
+                      width: 200.h,
+                      decoration: BoxDecoration(
+                          border: Border.all(),
+                          borderRadius: BorderRadius.circular(20)),
+                      child: IconButton(
+                        onPressed: () {},
+                        icon: Icon(Icons.add_photo_alternate_outlined),
+                        iconSize: 50,
+                        color: Mycolor.maincolor,
+                      ),
                     ),
                   ),
                 ),
-              ),
-              Center(
-                  child: Button.elevatedButton(
-                      text: 'Send',
-                      onPressed: () {
-                        EmergencyRequest();
-                        AnimatedSnackBar.material('emergency Requested',
-                                mobileSnackBarPosition:
-                                    MobileSnackBarPosition.bottom,
-                                type: AnimatedSnackBarType.success)
-                            .show(context);
-                      }))
-            ],
+                Center(
+                    child: Button.elevatedButton(
+                        text: 'Send',
+                        onPressed: () {
+                          EmergencyRequest();
+                          AnimatedSnackBar.material('emergency Requested',
+                                  mobileSnackBarPosition:
+                                      MobileSnackBarPosition.bottom,
+                                  type: AnimatedSnackBarType.success)
+                              .show(context);
+                        }))
+              ],
+            ),
           ),
         ));
   }

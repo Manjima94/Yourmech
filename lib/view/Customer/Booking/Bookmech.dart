@@ -102,7 +102,7 @@ class _BookingState extends State<Booking> {
                       ),
                     ),
                   ]),
-              Expanded(child: TabBarView(children: const [Fourtyre(), Twotyre()]))
+              Expanded(child: TabBarView(children:  [Fourtyre(name: '',), Twotyre()]))
             ],
           ),
         ));

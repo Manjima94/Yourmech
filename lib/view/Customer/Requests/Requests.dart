@@ -78,7 +78,10 @@ class _UserRequestState extends State<UserRequest> {
                   ]),
             ),
           ),
-          Expanded(child: TabBarView(children:[ TabRequest(),UserAccept()]))
+          Expanded(child: TabBarView(children:[ TabRequest(
+              
+          
+          ),UserAccept()]))
  ]),
       ),
     );

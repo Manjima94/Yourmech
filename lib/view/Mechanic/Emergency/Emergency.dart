@@ -8,6 +8,7 @@ import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:yourmech/model/style/color.dart';
 import 'package:yourmech/model/widget/custom_heading.dart';
+import 'package:yourmech/model/widget/custom_text.dart';
 import 'package:yourmech/view/Mechanic/Emergency/emergencyreq.dart';
 
 class Emergency extends StatefulWidget {
@@ -52,7 +53,7 @@ class _EmergencyState extends State<Emergency> {
                   var emergency = snapshot.data!.docs[index];
                   return Padding(
                     padding:
-                        const EdgeInsets.only(top: 20, left: 20, right: 20),
+                        const EdgeInsets.only(top: 20, left: 30, right: 30),
                     child: OpenContainer(
                       closedShape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(20)),
@@ -62,15 +63,15 @@ class _EmergencyState extends State<Emergency> {
                           (BuildContext context, VoidCallback openContainer) {
                         return ListTile(
                           contentPadding: REdgeInsets.symmetric(
-                              horizontal: 30.r, vertical: 0.r),
+                              horizontal: 30.r, vertical: 10.r),
                           tileColor: Colors.white,
                           shape: ContinuousRectangleBorder(
                               borderRadius: BorderRadius.circular(0.r)),
                           title: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(emergency['Name']),
-                              Text(emergency['Location']),
+                              CustomText(emergency['Name']),
+                              CustomText(emergency['Location']),
                             ],
                           ),
                           leading: CircleAvatar(
@@ -80,7 +81,13 @@ class _EmergencyState extends State<Emergency> {
                         );
                       },
                       openBuilder: (BuildContext context, VoidCallback _) {
-                        return EmergencyRequest();
+                        return EmergencyRequest(
+                          username: '',
+                          usercontact: '',
+                          userlocation: '',
+                          vehicle: '',
+                          service: '',
+                        );
                       },
                     ),
                   );

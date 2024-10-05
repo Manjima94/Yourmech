@@ -7,7 +7,8 @@ import 'package:yourmech/model/widget/custom_text.dart';
 import 'package:yourmech/view/Customer/Booking/mechinfo.dart';
 
 class Twotyre extends StatefulWidget {
-  const Twotyre({super.key});
+  final String name;
+  Twotyre({this.name = '', super.key});
 
   @override
   State<Twotyre> createState() => _TwotyreState();
@@ -21,15 +22,12 @@ class _TwotyreState extends State<Twotyre> {
       body: StreamBuilder(
           stream: FirebaseFirestore.instance
               .collection('mechanics')
-              .where('vehicle_type', whereIn: ['2 tyre', 'Both'])
-              .snapshots(),
+              .where('vehicle_type', whereIn: ['2 tyre', 'Both']).snapshots(),
           builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
-           
             if (snapshot.connectionState == ConnectionState.waiting) {
               return const Center(child: CircularProgressIndicator());
             }
 
-           
             if (snapshot.hasError) {
               return const Center(child: Text('Error fetching data.'));
             }
@@ -66,7 +64,7 @@ class _TwotyreState extends State<Twotyre> {
                               children: [
                                 CustomText(twotyre['name']),
                                 CustomText(twotyre['location']),
-                                Text('***'),
+                                const Text('***'),
                               ],
                             ),
                             leading: CircleAvatar(
@@ -76,7 +74,7 @@ class _TwotyreState extends State<Twotyre> {
                           );
                         },
                         openBuilder: (BuildContext context, VoidCallback _) {
-                          return const Mechinfo();
+                         return Mechinfo();
                         }),
                   );
                 });

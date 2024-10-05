@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:animated_snack_bar/animated_snack_bar.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -8,6 +9,7 @@ import 'package:intl/intl.dart'; // For date formatting
 import 'package:yourmech/model/style/color.dart';
 import 'package:yourmech/model/widget/custom_button.dart';
 import 'package:yourmech/model/widget/custom_text.dart';
+import 'package:yourmech/view/Customer/Requests/requestinfo.dart';
 
 class Mechinfo extends StatefulWidget {
   const Mechinfo({super.key});
@@ -19,10 +21,12 @@ class Mechinfo extends StatefulWidget {
 class _MechinfoState extends State<Mechinfo> {
   DateTime? selectedDate;
   TimeOfDay? selectedTime;
-  
+  TextEditingController serviceController = TextEditingController();
   TextEditingController dateController = TextEditingController();
   TextEditingController timeController = TextEditingController();
-
+  TextEditingController locationController = TextEditingController();
+  TextEditingController phoneController = TextEditingController();
+TextEditingController vehicleController = TextEditingController();
   @override
   void dispose() {
     dateController.dispose();
@@ -41,7 +45,8 @@ class _MechinfoState extends State<Mechinfo> {
     if (pickedDate != null) {
       setState(() {
         selectedDate = pickedDate;
-        dateController.text = DateFormat('dd-MM-yyyy').format(pickedDate); // Format date as DD-MM-YYYY
+        dateController.text = DateFormat('dd-MM-yyyy')
+            .format(pickedDate); // Format date as DD-MM-YYYY
       });
     }
   }
@@ -55,10 +60,45 @@ class _MechinfoState extends State<Mechinfo> {
     if (pickedTime != null) {
       setState(() {
         selectedTime = pickedTime;
-        timeController.text = pickedTime.format(context); // Display selected time
+        timeController.text =
+            pickedTime.format(context); // Display selected time
       });
     }
   }
+
+ Future<void> booking() async {
+  try {
+    await FirebaseFirestore.instance.collection('Booking Request').doc().set({
+      'Service': serviceController.text,
+      'Time': timeController.text,
+      'Date': dateController.text,
+      'Location': locationController.text,
+      'Contact': phoneController.text,
+      'Vehicle': vehicleController.text
+    });
+    
+    // Navigate to BookRequestInfo with the data
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => BookRequestInfo(
+          service: serviceController.text,
+          vehicle: vehicleController.text,
+          date: dateController.text,
+          time: timeController.text,
+          location: locationController.text,
+          contact: phoneController.text,
+        ),
+      ),
+    );
+  } catch (e) {
+    AnimatedSnackBar.material('Failed to submit request: $e',
+            mobileSnackBarPosition: MobileSnackBarPosition.bottom,
+            type: AnimatedSnackBarType.error)
+        .show(context);
+  }
+}
+
 
   @override
   Widget build(BuildContext context) {
@@ -84,56 +124,6 @@ class _MechinfoState extends State<Mechinfo> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            CircleAvatar(
-              radius: 60,
-            ),
-            Row(
-              children: [
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: const [
-                    Padding(
-                      padding: EdgeInsets.all(10),
-                      child: Icon(
-                        Icons.person,
-                        color: Mycolor.maincolor,
-                      ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.all(7),
-                      child: Icon(
-                        Icons.call,
-                        color: Mycolor.maincolor,
-                      ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.all(10),
-                      child: Icon(
-                        Icons.miscellaneous_services,
-                        color: Mycolor.maincolor,
-                      ),
-                    ),
-                  ],
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.only(top: 10, bottom: 7, left: 10),
-                      child: CustomText('Name'),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(top: 7, bottom: 7, left: 10),
-                      child: CustomText('Contact'),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(top: 7, bottom: 8, left: 10),
-                      child: CustomText('Services'),
-                    ),
-                  ],
-                ),
-              ],
-            ),
             SizedBox(
               width: double.infinity,
               child: Divider(
@@ -141,8 +131,12 @@ class _MechinfoState extends State<Mechinfo> {
                 height: 40,
               ),
             ),
-            CustomText('Enter your booking details :\n'),
+            CustomText(
+              'Enter your booking details :\n',
+              size: 18.spMin,
+            ),
             TextFormField(
+              controller: serviceController,
               decoration: InputDecoration(
                 hintText: 'What service do you need?',
                 hintStyle: TextStyle(fontFamily: 'Poppins'),
@@ -154,8 +148,49 @@ class _MechinfoState extends State<Mechinfo> {
                 filled: true,
               ),
             ),
+   SizedBox(height: 20),
+            TextFormField(
+              controller: vehicleController,
+              decoration: InputDecoration(
+                hintText: 'Vehicle',
+                hintStyle: TextStyle(fontFamily: 'Poppins'),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(20),
+                  borderSide: BorderSide.none,
+                ),
+                fillColor: Colors.white,
+                filled: true,
+              ),
+            ),
             SizedBox(height: 20),
-            // Date Picker Field
+            TextFormField(
+              controller: locationController,
+              decoration: InputDecoration(
+                hintText: 'Location',
+                hintStyle: TextStyle(fontFamily: 'Poppins'),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(20),
+                  borderSide: BorderSide.none,
+                ),
+                fillColor: Colors.white,
+                filled: true,
+              ),
+            ),
+            SizedBox(height: 20),
+            TextFormField(
+              controller: phoneController,
+              decoration: InputDecoration(
+                hintText: 'Contact No',
+                hintStyle: TextStyle(fontFamily: 'Poppins'),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(20),
+                  borderSide: BorderSide.none,
+                ),
+                fillColor: Colors.white,
+                filled: true,
+              ),
+            ),
+            SizedBox(height: 20),
             TextFormField(
               controller: dateController,
               readOnly: true,
@@ -199,7 +234,8 @@ class _MechinfoState extends State<Mechinfo> {
               child: Button.elevatedButton(
                 text: 'Request',
                 onPressed: () {
-                  AnimatedSnackBar.material( 
+                  booking();
+                  AnimatedSnackBar.material(
                     'Booking Requested',
                     mobileSnackBarPosition: MobileSnackBarPosition.bottom,
                     type: AnimatedSnackBarType.success,
