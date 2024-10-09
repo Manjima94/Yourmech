@@ -21,12 +21,13 @@ class Mechinfo extends StatefulWidget {
 class _MechinfoState extends State<Mechinfo> {
   DateTime? selectedDate;
   TimeOfDay? selectedTime;
+  Map<String, String> book = {};
   TextEditingController serviceController = TextEditingController();
   TextEditingController dateController = TextEditingController();
   TextEditingController timeController = TextEditingController();
   TextEditingController locationController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
-TextEditingController vehicleController = TextEditingController();
+  TextEditingController vehicleController = TextEditingController();
   @override
   void dispose() {
     dateController.dispose();
@@ -60,45 +61,28 @@ TextEditingController vehicleController = TextEditingController();
     if (pickedTime != null) {
       setState(() {
         selectedTime = pickedTime;
-        timeController.text =
-            pickedTime.format(context); // Display selected time
+        timeController.text = pickedTime.format(context);
       });
     }
   }
 
- Future<void> booking() async {
-  try {
-    await FirebaseFirestore.instance.collection('Booking Request').doc().set({
-      'Service': serviceController.text,
-      'Time': timeController.text,
-      'Date': dateController.text,
-      'Location': locationController.text,
-      'Contact': phoneController.text,
-      'Vehicle': vehicleController.text
-    });
-    
-    // Navigate to BookRequestInfo with the data
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => BookRequestInfo(
-          service: serviceController.text,
-          vehicle: vehicleController.text,
-          date: dateController.text,
-          time: timeController.text,
-          location: locationController.text,
-          contact: phoneController.text,
-        ),
-      ),
-    );
-  } catch (e) {
-    AnimatedSnackBar.material('Failed to submit request: $e',
-            mobileSnackBarPosition: MobileSnackBarPosition.bottom,
-            type: AnimatedSnackBarType.error)
-        .show(context);
+  Future<void> booking() async {
+    try {
+      await FirebaseFirestore.instance.collection('Booking Request').doc().set({
+        'Service': serviceController.text,
+        'Time': timeController.text,
+        'Date': dateController.text,
+        'Location': locationController.text,
+        'Contact': phoneController.text,
+        'Vehicle': vehicleController.text
+      });
+    } catch (e) {
+      AnimatedSnackBar.material('Failed to submit request: $e',
+              mobileSnackBarPosition: MobileSnackBarPosition.bottom,
+              type: AnimatedSnackBarType.error)
+          .show(context);
+    }
   }
-}
-
 
   @override
   Widget build(BuildContext context) {
@@ -148,7 +132,7 @@ TextEditingController vehicleController = TextEditingController();
                 filled: true,
               ),
             ),
-   SizedBox(height: 20),
+            SizedBox(height: 20),
             TextFormField(
               controller: vehicleController,
               decoration: InputDecoration(
@@ -234,7 +218,22 @@ TextEditingController vehicleController = TextEditingController();
               child: Button.elevatedButton(
                 text: 'Request',
                 onPressed: () {
+                  book.addAll({
+                    'Service': serviceController.text,
+                    'Time': timeController.text,
+                    'Date': dateController.text,
+                    'Location': locationController.text,
+                    'Contact': phoneController.text,
+                    'Vehicle': vehicleController.text
+                  });
+
                   booking();
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => BookRequestInfo(bookinfo: book,),
+                    ),
+                  );
                   AnimatedSnackBar.material(
                     'Booking Requested',
                     mobileSnackBarPosition: MobileSnackBarPosition.bottom,

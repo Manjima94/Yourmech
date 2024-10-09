@@ -1,23 +1,17 @@
+// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:yourmech/model/style/color.dart';
 import 'package:yourmech/model/widget/custom_text.dart';
-class BookRequestInfo extends StatefulWidget {
-  final String service;
-  final String vehicle;
-  final String date;
-  final String time;
-  final String location;
-  final String contact;
 
-  const BookRequestInfo({
+// ignore: must_be_immutable
+class BookRequestInfo extends StatefulWidget {
+  Map<String, String> bookinfo; 
+
+  BookRequestInfo({
     super.key,
-    required this.service,
-    required this.vehicle,
-    required this.date,
-    required this.time,
-    required this.location,
-    required this.contact,
+    required this.bookinfo,
   });
 
   @override
@@ -42,38 +36,72 @@ class _BookRequestInfoState extends State<BookRequestInfo> {
               borderRadius: BorderRadius.circular(25.r),
               color: Colors.white,
             ),
+            // ignore: prefer_const_constructors
             child: Padding(
               padding: const EdgeInsets.only(top: 150),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.end,
+                  Row(
                     children: [
-                      Padding(
-                        padding: EdgeInsets.all(8),
-                        child: CustomText('Service: ${widget.service}'),
+                      const Column(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.all(8),
+                            child: CustomText('Service: '),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: CustomText('Vehicle:'),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: CustomText('Date:'),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: CustomText('Time:'),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: CustomText('Location: '),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: CustomText('Contact no: '),
+                          ),
+                        ],
                       ),
-                      Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: CustomText('Vehicle: ${widget.vehicle}'),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: CustomText('Date: ${widget.date}'),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: CustomText('Time: ${widget.time}'),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: CustomText('Location: ${widget.location}'),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: CustomText('Contact no: ${widget.contact}'),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(8),
+                            child: CustomText(widget.bookinfo['Service'] ?? ''),
+                          ),
+                           Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: CustomText(widget.bookinfo['Vehicle'] ?? ''),
+                          ),
+                           Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: CustomText(widget.bookinfo['Date']?? ''),
+                          ),
+                           Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: CustomText(widget.bookinfo['Time']??''),
+                          ),
+                           Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: CustomText(widget.bookinfo['Location'] ?? ''),
+                          ),
+                           Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: CustomText(widget.bookinfo['Contact no'] ?? ''),
+                          ),
+                        ],
                       ),
                     ],
                   ),

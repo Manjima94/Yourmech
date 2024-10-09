@@ -5,26 +5,15 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:uuid/uuid.dart';
 import 'package:yourmech/model/style/color.dart';
 import 'package:yourmech/model/widget/custom_button.dart';
 import 'package:yourmech/model/widget/custom_text.dart';
 
 class EmergRequest extends StatefulWidget {
-  final String name;
-  final String vehiclemodel;
-  final String service;
-  final String location;
-  final String phone;
 
   EmergRequest({
     Key? key,
-    this.name = '',
-    this.vehiclemodel = '',
-    this.service = '',
-    this.location = '',
-    this.phone = '',
+   
   }) : super(key: key);
 
   @override
@@ -41,25 +30,9 @@ class _EmergRequestState extends State<EmergRequest> {
   late TextEditingController locationController;
   late TextEditingController phoneController;
 
-  @override
-  void initState() {
-    super.initState();
-    nameController = TextEditingController(text: widget.name);
-    vehicleModelController = TextEditingController(text: widget.vehiclemodel);
-    serviceController = TextEditingController(text: widget.service);
-    locationController = TextEditingController(text: widget.location);
-    phoneController = TextEditingController(text: widget.phone);
-  }
 
-  @override
-  void dispose() {
-    nameController.dispose();
-    vehicleModelController.dispose();
-    serviceController.dispose();
-    locationController.dispose();
-    phoneController.dispose();
-    super.dispose();
-  }
+
+
 
   Future<void> EmergencyRequest() async {
     if (!_formKey.currentState!.validate()) {
