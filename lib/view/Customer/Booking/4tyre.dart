@@ -6,6 +6,7 @@ import 'package:yourmech/model/style/color.dart';
 import 'package:yourmech/model/widget/custom_text.dart';
 import 'package:yourmech/view/Customer/Booking/mechinfo.dart';
 
+// ignore: must_be_immutable
 class Fourtyre extends StatefulWidget {
   String name;
    Fourtyre({required this.name,

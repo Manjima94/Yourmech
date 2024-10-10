@@ -26,7 +26,7 @@ class _TabRequestState extends State<TabRequest> {
                 .snapshots(),
             builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
               if (!snapshot.hasData) {
-                return Center(child: CircularProgressIndicator());
+                return const Center(child: CircularProgressIndicator());
               }
 
               return ListView.builder(
@@ -64,7 +64,14 @@ class _TabRequestState extends State<TabRequest> {
                         );
                       },
                       openBuilder: (BuildContext context, VoidCallback _) {
-                        return BookRequestInfo(bookinfo: {},);
+                        return BookRequestInfo(
+                          serviceController: TextEditingController(),
+                          dateController: TextEditingController(),
+                          timeController: TextEditingController(),
+                          locationController: TextEditingController(),
+                          phoneController: TextEditingController(),
+                          vehicleController: TextEditingController(),
+                        );
                       },
                     ),
                   );

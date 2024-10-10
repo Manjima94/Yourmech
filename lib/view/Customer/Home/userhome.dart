@@ -60,24 +60,26 @@ class _UserHomeState extends State<UserHome> {
                 padding: const EdgeInsets.all(20),
                 child: ElevatedButton(
                   style: ButtonStyle(
-                    shadowColor: MaterialStatePropertyAll(Mycolor.maincolor),
-                    elevation: MaterialStatePropertyAll(5),
-                    fixedSize: MaterialStatePropertyAll(Size(
+                    shadowColor: WidgetStatePropertyAll(Mycolor.maincolor),
+                    elevation: WidgetStatePropertyAll(5),
+                    fixedSize: WidgetStatePropertyAll(Size(
                         ScreenUtil().setWidth(280),
                         ScreenUtil().setHeight(60))),
-                    shape: MaterialStatePropertyAll(
+                    shape: WidgetStatePropertyAll(
                       RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20),
                       ),
                     ),
-                    backgroundColor: MaterialStatePropertyAll(
+                    backgroundColor: WidgetStatePropertyAll(
                         Color.fromARGB(255, 255, 255, 255)),
                   ),
-                  onPressed: () { Navigator.push(
+                  onPressed: () {
+                    Navigator.push(
                         context,
                         MaterialPageRoute(
                           builder: (context) => Booking(),
-                        ));},
+                        ));
+                  },
                   child: Row(
                     children: [
                       Text(
@@ -178,17 +180,16 @@ class _UserHomeState extends State<UserHome> {
                 padding: const EdgeInsets.only(left: 270),
                 child: ElevatedButton(
                   style: ButtonStyle(
-                    shadowColor: MaterialStatePropertyAll(Mycolor.maincolor),
-                    elevation: MaterialStatePropertyAll(5),
-                    fixedSize: MaterialStatePropertyAll(Size(
+                    shadowColor: WidgetStatePropertyAll(Mycolor.maincolor),
+                    elevation: WidgetStatePropertyAll(5),
+                    fixedSize: WidgetStatePropertyAll(Size(
                         ScreenUtil().setWidth(90), ScreenUtil().setHeight(15))),
-                    shape: MaterialStatePropertyAll(
+                    shape: WidgetStatePropertyAll(
                       RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20),
                       ),
                     ),
-                    backgroundColor:
-                        MaterialStatePropertyAll(Mycolor.maincolor),
+                    backgroundColor: WidgetStatePropertyAll(Mycolor.maincolor),
                   ),
                   onPressed: () {
                     Navigator.push(

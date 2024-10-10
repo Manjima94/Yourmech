@@ -1,5 +1,3 @@
-
-
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
@@ -66,19 +64,19 @@ class _RequestInfoState extends State<RequestInfo> {
                         child: CustomText('Contact no :'),
                       ),
                       Padding(
-                      padding: EdgeInsets.only(top: 40.r,right: 10),
+                        padding: EdgeInsets.only(top: 40.r, right: 10),
                         child: ElevatedButton(
                           style: ButtonStyle(
-                            fixedSize: MaterialStatePropertyAll(Size(
+                            fixedSize: WidgetStatePropertyAll(Size(
                                 ScreenUtil().setWidth(117),
                                 ScreenUtil().setHeight(30))),
-                            shape: MaterialStatePropertyAll(
+                            shape: WidgetStatePropertyAll(
                               RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10),
                               ),
                             ),
                             backgroundColor:
-                                MaterialStatePropertyAll(Mycolor.button),
+                                WidgetStatePropertyAll(Mycolor.button),
                           ),
                           onPressed: () {},
                           child: Text(
@@ -92,7 +90,8 @@ class _RequestInfoState extends State<RequestInfo> {
                         ),
                       )
                     ],
-                  ), Column(
+                  ),
+                  Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
@@ -120,19 +119,19 @@ class _RequestInfoState extends State<RequestInfo> {
                         child: CustomText(''),
                       ),
                       Padding(
-                      padding: EdgeInsets.only(top: 40.r,right: 10),
+                        padding: EdgeInsets.only(top: 40.r, right: 10),
                         child: ElevatedButton(
                           style: ButtonStyle(
-                            fixedSize: MaterialStatePropertyAll(Size(
+                            fixedSize: WidgetStatePropertyAll(Size(
                                 ScreenUtil().setWidth(117),
                                 ScreenUtil().setHeight(30))),
-                            shape: MaterialStatePropertyAll(
+                            shape: WidgetStatePropertyAll(
                               RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10),
                               ),
                             ),
                             backgroundColor:
-                                MaterialStatePropertyAll(Mycolor.button),
+                                WidgetStatePropertyAll(Mycolor.button),
                           ),
                           onPressed: () {},
                           child: Text(
@@ -152,9 +151,9 @@ class _RequestInfoState extends State<RequestInfo> {
             ),
           ),
         ),
-       
         Positioned(
-          left: 120,top: 120,
+          left: 120,
+          top: 120,
           child: Padding(
             padding: EdgeInsets.all(24.r),
             child: CircleAvatar(

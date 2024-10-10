@@ -151,17 +151,17 @@ class _EmergencyRequestState extends State<EmergencyRequest> {
                       padding: const EdgeInsets.only(bottom: 30),
                       child: ElevatedButton(
                         style: ButtonStyle(
-                          fixedSize: MaterialStateProperty.all(Size(
+                          fixedSize: WidgetStateProperty.all(Size(
                             ScreenUtil().setWidth(170),
                             ScreenUtil().setHeight(30),
                           )),
-                          shape: MaterialStateProperty.all(
+                          shape: WidgetStateProperty.all(
                             RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10),
                             ),
                           ),
                           backgroundColor:
-                              MaterialStateProperty.all(Mycolor.button),
+                              WidgetStateProperty.all(Mycolor.button),
                         ),
                         onPressed: () async {
                           final phoneUri = Uri.parse('tel:${widget.usercontact}');

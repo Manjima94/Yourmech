@@ -22,6 +22,7 @@ class ProfileController {
         }
       }
     } catch (e) {
+      // ignore: avoid_print
       print('cant get details: $e');
     }
     return null;
@@ -40,6 +41,7 @@ class ProfileController {
             .update(profileModel.toMap());
       }
     } catch (e) {
+      // ignore: avoid_print
       print('Error updating user profile: $e');
     }
    

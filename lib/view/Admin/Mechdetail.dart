@@ -37,25 +37,47 @@ class _MechDetailsState extends State<MechDetails> {
                   padding: EdgeInsets.all(18.0),
                   child: Column(
                     children: [
-                      Icon(Icons.call,color: Mycolor.maincolor,),
+                      Icon(
+                        Icons.call,
+                        color: Mycolor.maincolor,
+                      ),
                       Padding(
                         padding: EdgeInsets.only(top: 20, bottom: 20),
-                        child: Icon(Icons.location_on,color: Mycolor.maincolor,),
+                        child: Icon(
+                          Icons.location_on,
+                          color: Mycolor.maincolor,
+                        ),
                       ),
-                      Icon(Icons.commute,color: Mycolor.maincolor,),
+                      Icon(
+                        Icons.commute,
+                        color: Mycolor.maincolor,
+                      ),
                       Padding(
                         padding: EdgeInsets.only(top: 20, bottom: 20),
-                        child: Icon(Icons.store_mall_directory,color: Mycolor.maincolor,),
+                        child: Icon(
+                          Icons.store_mall_directory,
+                          color: Mycolor.maincolor,
+                        ),
                       ),
-                      Icon(Icons.commute,color: Mycolor.maincolor,),
+                      Icon(
+                        Icons.commute,
+                        color: Mycolor.maincolor,
+                      ),
                       Padding(
                         padding: EdgeInsets.only(top: 20, bottom: 25),
-                        child: Icon(Icons.miscellaneous_services,color: Mycolor.maincolor,),
+                        child: Icon(
+                          Icons.miscellaneous_services,
+                          color: Mycolor.maincolor,
+                        ),
                       ),
-                      Icon(Icons.work_history_outlined,color: Mycolor.maincolor,),
+                      Icon(
+                        Icons.work_history_outlined,
+                        color: Mycolor.maincolor,
+                      ),
                       Padding(
                         padding: EdgeInsets.only(top: 20, bottom: 40),
-                        child: Icon(Icons.file_present_outlined,color: Mycolor.maincolor),
+                        child: Icon(Icons.file_present_outlined,
+                            color: Mycolor.maincolor),
                       ),
                     ],
                   ),
@@ -89,21 +111,22 @@ class _MechDetailsState extends State<MechDetails> {
                 ),
               ],
             ),
-            Row(mainAxisAlignment: MainAxisAlignment.spaceAround,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 ElevatedButton(
                   style: ButtonStyle(
-                    shadowColor: MaterialStatePropertyAll(Mycolor.maincolor),
-                    elevation: MaterialStatePropertyAll(5),
-                    fixedSize: MaterialStatePropertyAll(Size(
+                    shadowColor: WidgetStatePropertyAll(Mycolor.maincolor),
+                    elevation: WidgetStatePropertyAll(5),
+                    fixedSize: WidgetStatePropertyAll(Size(
                         ScreenUtil().setWidth(130),
                         ScreenUtil().setHeight(30))),
-                    shape: MaterialStatePropertyAll(
+                    shape: WidgetStatePropertyAll(
                       RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
                     ),
-                    backgroundColor: MaterialStatePropertyAll(Mycolor.button),
+                    backgroundColor: WidgetStatePropertyAll(Mycolor.button),
                   ),
                   onPressed: () {},
                   child: Text(
@@ -117,17 +140,17 @@ class _MechDetailsState extends State<MechDetails> {
                 ),
                 ElevatedButton(
                   style: ButtonStyle(
-                    shadowColor: MaterialStatePropertyAll(Mycolor.maincolor),
-                    elevation: MaterialStatePropertyAll(5),
-                    fixedSize: MaterialStatePropertyAll(Size(
+                    shadowColor: WidgetStatePropertyAll(Mycolor.maincolor),
+                    elevation: WidgetStatePropertyAll(5),
+                    fixedSize: WidgetStatePropertyAll(Size(
                         ScreenUtil().setWidth(130),
                         ScreenUtil().setHeight(30))),
-                    shape: MaterialStatePropertyAll(
+                    shape: WidgetStatePropertyAll(
                       RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
                     ),
-                    backgroundColor: MaterialStatePropertyAll(Mycolor.button),
+                    backgroundColor: WidgetStatePropertyAll(Mycolor.button),
                   ),
                   onPressed: () {},
                   child: Text(

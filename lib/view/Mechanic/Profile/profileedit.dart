@@ -42,22 +42,22 @@ class _ProfileEditState extends State<ProfileEdit> {
               children: [
                 Stack(
                   children: [
-                      Padding(
-                  padding: EdgeInsets.only(bottom: 0, top: 22.r),
-                  child: Container(
-                    height: ScreenUtil().setHeight(105),
-                    decoration: BoxDecoration(
-                        color: Mycolor.maincolor, shape: BoxShape.circle),
-                  ),
-                ),
-                Center(
-                  child: Padding(
-                    padding: EdgeInsets.only(bottom: 0, top: 24.r),
-                    child: CircleAvatar(
-                      radius: 51.r,
+                    Padding(
+                      padding: EdgeInsets.only(bottom: 0, top: 22.r),
+                      child: Container(
+                        height: ScreenUtil().setHeight(105),
+                        decoration: BoxDecoration(
+                            color: Mycolor.maincolor, shape: BoxShape.circle),
+                      ),
                     ),
-                  ),
-                ),
+                    Center(
+                      child: Padding(
+                        padding: EdgeInsets.only(bottom: 0, top: 24.r),
+                        child: CircleAvatar(
+                          radius: 51.r,
+                        ),
+                      ),
+                    ),
                   ],
                 ),
                 SizedBox(height: 20.h),
@@ -77,15 +77,15 @@ class _ProfileEditState extends State<ProfileEdit> {
                 SizedBox(height: 20.h),
                 ElevatedButton(
                     style: ButtonStyle(
-                      fixedSize: MaterialStatePropertyAll(Size(
+                      fixedSize: WidgetStatePropertyAll(Size(
                           ScreenUtil().setWidth(250),
                           ScreenUtil().setHeight(30))),
-                      shape: MaterialStatePropertyAll(
+                      shape: WidgetStatePropertyAll(
                         RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10),
                         ),
                       ),
-                      backgroundColor: MaterialStatePropertyAll(Mycolor.button),
+                      backgroundColor: WidgetStatePropertyAll(Mycolor.button),
                     ),
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {

@@ -13,16 +13,16 @@ class Button {
   }) {
     return ElevatedButton(
       style: ButtonStyle(
-        shadowColor: MaterialStatePropertyAll(Mycolor.maincolor),
-        elevation: MaterialStatePropertyAll(5),
-        fixedSize: MaterialStatePropertyAll(
+        shadowColor: WidgetStatePropertyAll(Mycolor.maincolor),
+        elevation: WidgetStatePropertyAll(5),
+        fixedSize: WidgetStatePropertyAll(
             Size(ScreenUtil().setWidth(280), ScreenUtil().setHeight(45))),
-        shape: MaterialStatePropertyAll(
+        shape: WidgetStatePropertyAll(
           RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(borderRadius),
           ),
         ),
-        backgroundColor: MaterialStatePropertyAll(backgroundColor),
+        backgroundColor: WidgetStatePropertyAll(backgroundColor),
       ),
       onPressed: onPressed,
       child: Text(

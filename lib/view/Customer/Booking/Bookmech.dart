@@ -1,10 +1,11 @@
-// ignore_for_file: prefer_const_constructors, unused_import
+
+
+// ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
 import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:yourmech/model/style/color.dart';
-import 'package:yourmech/model/widget/custom_heading.dart';
 import 'package:yourmech/view/Customer/Booking/2tyre.dart';
 import 'package:yourmech/view/Customer/Booking/4tyre.dart';
 
@@ -38,7 +39,7 @@ class _BookingState extends State<Booking> {
             flexibleSpace: ClipPath(
                 clipper: OvalBottomBorderClipper(),
                 child: Container(
-                  color: Color.fromARGB(255, 255, 255, 255),
+                  color: const Color.fromARGB(255, 255, 255, 255),
                   alignment: Alignment.center,
                   height: ScreenUtil().setHeight(150),
                   width: double.infinity,

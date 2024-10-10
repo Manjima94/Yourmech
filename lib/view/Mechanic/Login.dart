@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:yourmech/controller/Authentication/Mechlogin.dart';
 import 'package:yourmech/model/style/color.dart';
 import 'package:yourmech/model/widget/custom_button.dart';
 import 'package:yourmech/model/widget/custom_text.dart';

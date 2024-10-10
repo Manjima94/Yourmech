@@ -64,11 +64,11 @@ class _MechTabRequestState extends State<MechTabRequest> {
           //     ElevatedButton(
           //         style: ButtonStyle(
           //             backgroundColor:
-          //                 MaterialStatePropertyAll(Mycolor.maincolor),
-          //             shape: MaterialStatePropertyAll(
+          //                 WidgetStatePropertyAll(Mycolor.maincolor),
+          //             shape: WidgetStatePropertyAll(
           //                 RoundedRectangleBorder(
           //                     borderRadius: BorderRadius.circular(10))),
-          //             fixedSize: MaterialStatePropertyAll(Size(
+          //             fixedSize: WidgetStatePropertyAll(Size(
           //               ScreenUtil().setWidth(70),
           //               ScreenUtil().setHeight(21),
           //             ))),

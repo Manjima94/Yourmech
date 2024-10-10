@@ -21,7 +21,7 @@ class Mechinfo extends StatefulWidget {
 class _MechinfoState extends State<Mechinfo> {
   DateTime? selectedDate;
   TimeOfDay? selectedTime;
-  Map<String, String> book = {};
+
   TextEditingController serviceController = TextEditingController();
   TextEditingController dateController = TextEditingController();
   TextEditingController timeController = TextEditingController();
@@ -218,20 +218,17 @@ class _MechinfoState extends State<Mechinfo> {
               child: Button.elevatedButton(
                 text: 'Request',
                 onPressed: () {
-                  book.addAll({
-                    'Service': serviceController.text,
-                    'Time': timeController.text,
-                    'Date': dateController.text,
-                    'Location': locationController.text,
-                    'Contact': phoneController.text,
-                    'Vehicle': vehicleController.text
-                  });
-
                   booking();
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => BookRequestInfo(bookinfo: book,),
+                      builder: (context) => BookRequestInfo(
+                          serviceController: serviceController,
+                          timeController: timeController,
+                          dateController: dateController,
+                          locationController: locationController,
+                          phoneController: phoneController,
+                          vehicleController: vehicleController),
                     ),
                   );
                   AnimatedSnackBar.material(

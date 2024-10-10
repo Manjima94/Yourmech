@@ -18,6 +18,7 @@ class UserLoginModel {
         return null;
       }
     } catch (e) {
+      // ignore: avoid_print
       print('error: $e');
       
     }

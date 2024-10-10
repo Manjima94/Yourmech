@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:yourmech/model/style/color.dart';
@@ -7,13 +8,24 @@ import 'package:yourmech/model/widget/custom_text.dart';
 
 // ignore: must_be_immutable
 class BookRequestInfo extends StatefulWidget {
-  Map<String, String> bookinfo; 
-
+   final TextEditingController serviceController;
+  final TextEditingController dateController;
+  final TextEditingController timeController;
+  final TextEditingController locationController;
+  final TextEditingController phoneController;
+  final TextEditingController vehicleController;
   BookRequestInfo({
-    super.key,
-    required this.bookinfo,
-  });
 
+     required this.serviceController,
+    required this.dateController,
+    required this.timeController,
+    required this.locationController,
+    required this.phoneController,
+    required this.vehicleController,
+    super.key,
+    
+  });
+  
   @override
   State<BookRequestInfo> createState() => _BookRequestInfoState();
 }
@@ -36,7 +48,6 @@ class _BookRequestInfoState extends State<BookRequestInfo> {
               borderRadius: BorderRadius.circular(25.r),
               color: Colors.white,
             ),
-            // ignore: prefer_const_constructors
             child: Padding(
               padding: const EdgeInsets.only(top: 150),
               child: Row(
@@ -79,27 +90,29 @@ class _BookRequestInfoState extends State<BookRequestInfo> {
                         children: [
                           Padding(
                             padding: const EdgeInsets.all(8),
-                            child: CustomText(widget.bookinfo['Service'] ?? ''),
+                            child: CustomText(widget.serviceController as String),
                           ),
-                           Padding(
+                          Padding(
                             padding: EdgeInsets.all(8.0),
-                            child: CustomText(widget.bookinfo['Vehicle'] ?? ''),
+                            child: CustomText(widget.vehicleController as String),
                           ),
-                           Padding(
+                          Padding(
                             padding: EdgeInsets.all(8.0),
-                            child: CustomText(widget.bookinfo['Date']?? ''),
+                            child: CustomText(widget.locationController as String),
                           ),
-                           Padding(
+                          Padding(
                             padding: EdgeInsets.all(8.0),
-                            child: CustomText(widget.bookinfo['Time']??''),
+                            child: CustomText(widget.dateController as String),
                           ),
-                           Padding(
+                          Padding(
                             padding: EdgeInsets.all(8.0),
-                            child: CustomText(widget.bookinfo['Location'] ?? ''),
+                            child:
+                                CustomText(widget.timeController as String),
                           ),
-                           Padding(
+                          Padding(
                             padding: EdgeInsets.all(8.0),
-                            child: CustomText(widget.bookinfo['Contact no'] ?? ''),
+                            child:
+                                CustomText(widget.phoneController as String),
                           ),
                         ],
                       ),

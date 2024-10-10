@@ -195,16 +195,16 @@ class _PaymentState extends State<Payment> {
             ),
             ElevatedButton(
               style: ButtonStyle(
-                shadowColor: MaterialStatePropertyAll(Mycolor.maincolor),
-                elevation: MaterialStatePropertyAll(5),
-                fixedSize: MaterialStatePropertyAll(Size(
+                shadowColor: WidgetStatePropertyAll(Mycolor.maincolor),
+                elevation: WidgetStatePropertyAll(5),
+                fixedSize: WidgetStatePropertyAll(Size(
                     ScreenUtil().setWidth(250), ScreenUtil().setHeight(45))),
-                shape: MaterialStatePropertyAll(
+                shape: WidgetStatePropertyAll(
                   RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(15),
                   ),
                 ),
-                backgroundColor: MaterialStatePropertyAll(Mycolor.button),
+                backgroundColor: WidgetStatePropertyAll(Mycolor.button),
               ),
               onPressed: () {
                 // Navigator.push(

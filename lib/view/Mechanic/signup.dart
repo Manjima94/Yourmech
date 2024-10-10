@@ -36,9 +36,6 @@ class _SignupState extends State<Signup> {
   var mechshopname = TextEditingController();
   late String tyre;
 
-  @override
-  
-
   Future<void> signupmechanic() async {
     if (formKey.currentState!.validate()) {
       try {

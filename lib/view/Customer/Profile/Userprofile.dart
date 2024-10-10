@@ -29,6 +29,7 @@ class _UserProfileState extends State<UserProfile> {
     try {
       SharedPreferences pref = await SharedPreferences.getInstance();
       String? userId = pref.getString('Useruid');
+      // ignore: avoid_print
       print('SharedPreference UserID: $userId');
       if (userId != null && userId.isNotEmpty) {
         DocumentSnapshot usersnapshot = await FirebaseFirestore.instance

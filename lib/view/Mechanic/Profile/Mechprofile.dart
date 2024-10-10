@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, avoid_print
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -67,6 +67,7 @@ class _MechProfileState extends State<MechProfile> {
         }
       }
     } catch (e) {
+      
       print('Error fetching student details: $e');
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Error fetching student details.')),

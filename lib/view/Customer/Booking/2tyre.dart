@@ -74,7 +74,7 @@ class _TwotyreState extends State<Twotyre> {
                           );
                         },
                         openBuilder: (BuildContext context, VoidCallback _) {
-                         return Mechinfo();
+                         return const Mechinfo();
                         }),
                   );
                 });

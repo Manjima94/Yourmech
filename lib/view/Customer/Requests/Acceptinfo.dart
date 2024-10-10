@@ -70,17 +70,17 @@ class _AcceptUserState extends State<AcceptUser> {
                 padding: const EdgeInsets.only(top: 30, bottom: 20),
                 child: ElevatedButton(
                   style: ButtonStyle(
-                    shadowColor: MaterialStatePropertyAll(Mycolor.maincolor),
-                    elevation: MaterialStatePropertyAll(5),
-                    fixedSize: MaterialStatePropertyAll(Size(
+                    shadowColor: WidgetStatePropertyAll(Mycolor.maincolor),
+                    elevation: WidgetStatePropertyAll(5),
+                    fixedSize: WidgetStatePropertyAll(Size(
                         ScreenUtil().setWidth(240),
                         ScreenUtil().setHeight(45))),
-                    shape: MaterialStatePropertyAll(
+                    shape: WidgetStatePropertyAll(
                       RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(15),
                       ),
                     ),
-                    backgroundColor: MaterialStatePropertyAll(Mycolor.button),
+                    backgroundColor: WidgetStatePropertyAll(Mycolor.button),
                   ),
                   onPressed: () {
                     showDialog(
@@ -110,7 +110,8 @@ class _AcceptUserState extends State<AcceptUser> {
                                     onPressed: () {
                                       AnimatedSnackBar.material(
                                               'Cancellation Requested',
-                                              mobileSnackBarPosition: MobileSnackBarPosition.bottom,
+                                              mobileSnackBarPosition:
+                                                  MobileSnackBarPosition.bottom,
                                               type:
                                                   AnimatedSnackBarType.success)
                                           .show(context);
@@ -140,16 +141,16 @@ class _AcceptUserState extends State<AcceptUser> {
               ),
               ElevatedButton(
                 style: ButtonStyle(
-                  shadowColor: MaterialStatePropertyAll(Mycolor.maincolor),
-                  elevation: MaterialStatePropertyAll(5),
-                  fixedSize: MaterialStatePropertyAll(Size(
+                  shadowColor: WidgetStatePropertyAll(Mycolor.maincolor),
+                  elevation: WidgetStatePropertyAll(5),
+                  fixedSize: WidgetStatePropertyAll(Size(
                       ScreenUtil().setWidth(240), ScreenUtil().setHeight(45))),
-                  shape: MaterialStatePropertyAll(
+                  shape: WidgetStatePropertyAll(
                     RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15),
                     ),
                   ),
-                  backgroundColor: MaterialStatePropertyAll(Mycolor.button),
+                  backgroundColor: WidgetStatePropertyAll(Mycolor.button),
                 ),
                 onPressed: () {
                   Navigator.push(
